@@ -185,21 +185,66 @@ static const uint8_t PROGMEM INITCMD_ILI9488_A[] = {
 
 static const uint8_t PROGMEM INITCMD_ST7796[] = {
   // This ST7796S initilization routine was copied from https://github.com/prenticedavid/Adafruit_ST7796S_kbv/blob/master/Adafruit_ST7796S_kbv.cpp
-  ILI9XXX_SWRESET, 0x80,         // Soft reset, then delay 150 ms
-  ILI9XXX_CSCON, 1, 0xC3,              // ?? Unlock Manufacturer
-  ILI9XXX_CSCON, 1, 0x96,
-  ILI9XXX_VMCTR1, 1, 0x1C,              //VCOM  Control 1 [1C]
-  ILI9XXX_MADCTL, 1, 0x48,              //Memory Access [00]
-  ILI9XXX_PIXFMT, 1, 0x55,              //565
-  ILI9XXX_IFMODE, 1, 0x80,              //Interface     [00]
-  ILI9XXX_INVCTR, 1, 0x01,              //Inversion Control [01]
-  ILI9XXX_DFUNCTR, 3, 0x80, 0x02, 0x3B,  // Display Function Control [80 02 3B] .kbv SS=1, NL=480
-  ILI9XXX_ETMOD, 1, 0xC6,              //Entry Mode      [06]
+  ILI9XXX_SWRESET, 0x80, // software reset, delay 150 ms
+  ILI9XXX_SLPOUT, 0x80, // sleep exit delay 150 ms
+  ILI9XXX_CSCON, 1, 0xC3,   // Command Set control > Enable extension command 2 partI
+  ILI9XXX_CSCON, 1, 0x96,   // Command Set control > Enable extension command 2 partII
+  ILI9XXX_MADCTL, 1, 0x48, // Memory Data Access Control MX, MY, RGB mode > X-Mirror, Top-Left to right-Buttom, RGB
+  ILI9XXX_PIXFMT, 1 ,0x55, // Interface Pixel Format > Control interface color format set to 16
+  ILI9XXX_INVCTR, 1, 0x01, //Column inversion > 1-dot inversion
+  ILI9XXX_DFUNCTR, 3, 0x80, 0x02, 0x3B, // Display Function Control > Bypass > Source Output Scan from S1 to S960, Gate Output scan from G1 to G480, scan cycle=2 > LCD Drive Line=8*(59+1)
+  ILI9XXX_OUTCADJ, 8,  0x40, 0x8A, 0x00, 0x00,  // Display Output Ctrl Adjust > ? > > ? > ? > ?
+      0x29, 0x19, 0xA5, 0x33, // Source eqaulizing period time= 22.5 us > Timing for "Gate start"=25 (Tclk) > Timing for "Gate End"=37 (Tclk), Gate driver EQ function ON
+  ILI9XXX_PWCTR2,  1, 0x06, // Power control2 > VAP(GVDD)=3.85+( vcom+vcom offset), VAN(GVCL)=-3.85+( vcom+vcom offset)
+  ILI9XXX_PWCTR3, 1, 0xA7, // Power control 3 > Source driving current level=low, Gamma driving current level=High
+  ILI9XXX_VMCTR1, 1, 0x18, // VCOM Control > VCOM=0.9
+  // possibly dodgy
+  ILI9XXX_NOP , 0x80, // ? Maybe delay 150 ms?
+  ILI9XXX_GMCTRP1, 14, 0xF0, 0x09, 0x0b, 0x06, 0x04, 0x15, // Gamma"+"
+                       0x2F, 0x54, 0x42, 0x3C, 0x17, 0x14, 
+                       0x18, 0x1B,  
+  ILI9XXX_GMCTRN1, 14, 0xE0, 0x09, 0x0B, 0x06, 0x04, 0x03, 
+                       0x2B, 0x43, 0x42, 0x3B, 0x16, 0x14,
+                       0x17, 0x1B, 
+  // possibly dodgy?
+  ILI9XXX_NOP , 0x80, // ? Maybe delay 150 ms?
+  ILI9XXX_CSCON, 0x3C, // Command Set control  > Disable extension command 2 partI
+  ILI9XXX_CSCON, 0x69, // Command Set control  > Disable extension command 2 partII
+  // end_tft_write();
+  // delay(120);
+  //begin_tft_write();
+  ILI9XXX_DISPON, 0x80,  // Display on, delay 150 ms   
 
-  ILI9XXX_CSCON, 1, 0x69,              //?? lock manufacturer commands
-  ILI9XXX_CSCON, 1, 0x3C,              //
-  ILI9XXX_SLPOUT, 0x80, // Exit Sleep, then delay 150 ms
-  ILI9XXX_DISPON, 0x80, // Main screen turn on, delay 150 ms
+
+  
+  /*
+  0xEF, 3, 0x03, 0x80, 0x02,
+  0xCF, 3, 0x00, 0xC1, 0x30,
+  0xED, 4, 0x64, 0x03, 0x12, 0x81,
+  0xE8, 3, 0x85, 0x00, 0x78,
+  0xCB, 5, 0x39, 0x2C, 0x00, 0x34, 0x02,
+  0xF7, 1, 0x20,
+  0xEA, 2, 0x00, 0x00,
+  ILI9XXX_PWCTR1  , 1, 0x23,             // Power control VRH[5:0]
+  ILI9XXX_PWCTR2  , 1, 0x10,             // Power control SAP[2:0];BT[3:0]
+  ILI9XXX_VMCTR1  , 2, 0x3e, 0x28,       // VCM control
+  ILI9XXX_VMCTR2  , 1, 0x86,             // VCM control2
+  ILI9XXX_MADCTL  , 1, 0x48,             // Memory Access Control
+  ILI9XXX_VSCRSADD, 1, 0x00,             // Vertical scroll zero
+  ILI9XXX_PIXFMT  , 1, 0x55,
+  ILI9XXX_FRMCTR1 , 2, 0x00, 0x18,
+  ILI9XXX_DFUNCTR , 3, 0x08, 0x82, 0x27, // Display Function Control
+  0xF2, 1, 0x00,                         // 3Gamma Function Disable
+  ILI9XXX_GAMMASET , 1, 0x01,             // Gamma curve selected
+  ILI9XXX_GMCTRP1 , 15, 0x0F, 0x31, 0x2B, 0x0C, 0x0E, 0x08, // Set Gamma
+                        0x4E, 0xF1, 0x37, 0x07, 0x10, 0x03,
+                        0x0E, 0x09, 0x00,
+  ILI9XXX_GMCTRN1 , 15, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, // Set Gamma
+                        0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C,
+                        0x31, 0x36, 0x0F,
+  ILI9XXX_SLPOUT  , 0x80,                // Exit Sleep
+  ILI9XXX_DISPON  , 0x80,                // Display on 
+  */
   0x00                                   // End of list
 };
 
