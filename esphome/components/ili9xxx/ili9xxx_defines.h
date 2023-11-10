@@ -88,6 +88,7 @@ static const uint8_t ILI9XXX_RDIDX = 0xDD;  // TBC
 
 static const uint8_t ILI9XXX_GMCTRP1 = 0xE0;
 static const uint8_t ILI9XXX_GMCTRN1 = 0xE1;
+static const uint8_t ILI9XXX_OUTCADJ = 0xE8;
 
 static const uint8_t ILI9XXX_CSCON = 0xF0;
 static const uint8_t ILI9XXX_ADJCTL3 = 0xF7;
