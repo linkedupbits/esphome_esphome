@@ -53,6 +53,7 @@ CONFIG_SCHEMA = cv.Schema(
             cv.Required(CONF_CS_PIN): cv.int_,
             cv.Required(CONF_CLK_PIN): cv.int_,
             cv.Required(CONF_DC_PIN): cv.int_,
+            cv.Optional(CONF_LAMBDA): cv.lambda_,
         }
 #    ,validate_tdisplays3,
 ).extend(cv.COMPONENT_SCHEMA)
