@@ -4,7 +4,6 @@
 #include "Free_Fonts.h"
 #include "TFT_eSPI.h"
 #include "esphome.h"
-#include "TFT_eWidget.h"
 
 #include "esphome/core/component.h"
 #include "esphome/core/log.h"
