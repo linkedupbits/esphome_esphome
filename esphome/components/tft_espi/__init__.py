@@ -49,8 +49,6 @@ CONFIG_SCHEMA = cv.Schema(
 
 
 async def to_code(config):
-    var = cg.new_Pvariable(config[CONF_ID])
-    await cg.register_component(var, config)
 
     cg.add_build_flag("-DUSER_SETUP_LOADED=1")
     # todo: Add driver selection to schema
@@ -86,13 +84,14 @@ async def to_code(config):
   
     cg.add_build_flag("-DTOUCH_CS=33")
 
-
     cg.add_library("SPI", None)
     cg.add_library("FS", None)
     cg.add_library("SPIFFS", None)
     cg.add_library("TFT_eSPI", None)
     cg.add_library("LittleFS", None)
 
+    var = cg.new_Pvariable(config[CONF_ID])
+    await cg.register_component(var, config)
 
     if CONF_LAMBDA in config:
         lambda_ = await cg.process_lambda(
