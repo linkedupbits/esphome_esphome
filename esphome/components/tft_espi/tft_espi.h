@@ -13,7 +13,7 @@ namespace tft_espi {
 
 static const char *const TAG = "TFT_eSPI";
 
-class TFT_eSPI : public PollingComponent
+class TFT_eSPI_ESPHome : public PollingComponent
 {
   public:
     void setup() override {
