@@ -50,6 +50,8 @@ CONFIG_SCHEMA = cv.Schema(
             cv.Required(CONF_MOSI_PIN): cv.int_,
             cv.Required(CONF_MISO_PIN): cv.int_,
             cv.Required(CONF_CS_PIN): cv.int_,
+            cv.Required(CONF_CLK_PIN): cv.int_,
+            cv.Required(CONF_DC_PIN): cv.int_,
         }
 #    ,validate_tdisplays3,
 ).extend(cv.COMPONENT_SCHEMA)
@@ -61,14 +63,14 @@ async def to_code(config):
     # todo: Add driver selection to schema
     cg.add_build_flag("-DST7796_DRIVER=1")
     # todo: add dimensions to schema
-    cg.add_build_flag("-DTFT_WIDTH=320")
-    cg.add_build_flag("-DTFT_HEIGHT=480")
-    cg.add_build_flag("-DCONFIG_TFT_MISO=12")
+    cg.add_build_flag("-DTFT_WIDTH="+ str(config[CONF_WIDTH]))
+    cg.add_build_flag("-DTFT_HEIGHT="+ str(config[CONF_HEIGHT]))
+    cg.add_build_flag("-DCONFIG_TFT_MISO="+ str(config[CONF_MISO_PIN]))
     cg.add_build_flag("-DTFT_MISO="+ str(config[CONF_MISO_PIN]))
     cg.add_build_flag("-DTFT_MOSI="+ str(config[CONF_MOSI_PIN]))
-    cg.add_build_flag("-DTFT_SCLK=14")
+    cg.add_build_flag("-DTFT_SCLK="+ str(config[CONF_CLK_PIN]))
     cg.add_build_flag("-DTFT_CS="+ str(config[CONF_CS_PIN]))
-    cg.add_build_flag("-DTFT_DC=2")
+    cg.add_build_flag("-DTFT_DC="+ str(config[CONF_DC_PIN]))
     cg.add_build_flag("-DTFT_RST=-1")
     
     
