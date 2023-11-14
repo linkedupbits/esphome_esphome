@@ -28,6 +28,8 @@ from esphome.const import (
     CONF_WIDTH,    
 )
 
+CONF_INIT_LAMBDA = "init"
+
 tft_espi_ns = cg.esphome_ns.namespace("tft_espi")
 TFT_ESPI = tft_espi_ns.class_("TFT_eSPI_ESPHome",
  cg.PollingComponent
@@ -54,6 +56,7 @@ CONFIG_SCHEMA = cv.Schema(
             cv.Required(CONF_CLK_PIN): cv.int_,
             cv.Required(CONF_DC_PIN): cv.int_,
             cv.Optional(CONF_LAMBDA): cv.lambda_,
+            cv.Optional(CONF_INIT_LAMBDA): cv.lambda_,
         }
 #    ,validate_tdisplays3,
 ).extend(cv.COMPONENT_SCHEMA)
@@ -109,3 +112,9 @@ async def to_code(config):
             config[CONF_LAMBDA], [(TFT_ESPI.operator("ref"), "it")], return_type=cg.void
         )
         cg.add(var.set_writer(lambda_))
+        
+    if CONF_INIT_LAMBDA in config:
+        lambda_ = await cg.process_lambda(
+            config[CONF_INIT_LAMBDA], [(TFT_ESPI.operator("ref"), "it")], return_type=cg.void
+        )
+        cg.add(var.set_writer(lambda_))        

@@ -13,6 +13,9 @@ namespace tft_espi {
 
 static const char *const TAG = "TFT_eSPI";
 
+class TFT_eSPI_ESPHome;
+using display_writer_t = std::function<void(TFT_eSPI_ESPHome &)>;
+
 class TFT_eSPI_ESPHome : public PollingComponent
 {
   public:
@@ -34,12 +37,15 @@ class TFT_eSPI_ESPHome : public PollingComponent
         //spr.setColorDepth(8); // Optionally set depth to 8 to halve RAM use
         //spr.createSprite(get_width_internal(), get_height_internal());
         // spr.fillSprite(TFT_TRANSPARENT);
+        do_init_();
     }
 
     void loop() override {
 
     }
 
+    void set_init(display_writer_t &&init) { this->init_ = init; }
+    void set_writer(display_writer_t &&writer) { this->writer_ = writer; }
     /// @brief this method prints some text
     void PrintText() {
         tft.setCursor(4, 20);
@@ -75,12 +81,24 @@ class TFT_eSPI_ESPHome : public PollingComponent
     /////////////
     void update() override {
         ESP_LOGV("tft_espi", "tft_espi update");
-        
+        do_update_();
         //spr.pushSprite(0, 0, TFT_TRANSPARENT);
     }
-
+  protected:
+    void do_init_() {
+        if (this->initlambda_.has_value()) {
+            (*this->initlambda_)(*this);
+        }
+    }
+    void do_update_() {
+        if (this->writer_.has_value()) {
+            (*this->writer_)(*this);
+        }
+    }
   private:
     TFT_eSPI tft = TFT_eSPI();
+    optional<display_writer_t> initlambda_{};
+    optional<display_writer_t> writer_{};
 
 };
 
