@@ -16,6 +16,7 @@ from esphome.const import (
     CONF_MOSI_PIN,
     CONF_SPI_ID,
     CONF_CS_PIN,
+    CONF_DC_PIN,
     CONF_NUMBER,
     CONF_INVERTED,
     KEY_CORE,
