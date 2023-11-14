@@ -88,17 +88,20 @@ class TFT_eSPI_ESPHome : public PollingComponent
     TFT_eSPI TFT () {return tft;}
   protected:
     void do_init_() {
+        std::lock_guard<std::mutex> guard(lambda_mutex);
         if (this->initlambda_.has_value()) {
             (*this->initlambda_)(*this);
         }
     }
     void do_update_() {
+        std::lock_guard<std::mutex> guard(lambda_mutex);
         if (this->writer_.has_value()) {
             (*this->writer_)(*this);
         }
     }
     
   private:
+    std::mutex lambda_mutex;
     TFT_eSPI tft = TFT_eSPI();
     optional<display_writer_t> initlambda_{};
     optional<display_writer_t> writer_{};
