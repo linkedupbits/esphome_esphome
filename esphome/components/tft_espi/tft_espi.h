@@ -1,5 +1,6 @@
-#ifndef TDISPLAY_S3
-#define TDISPLAY_S3
+#ifndef TFT_ESPI
+#define TFT_ESPI
+#include <mutex>
 
 #include "Free_Fonts.h"
 #include "TFT_eSPI.h"
