@@ -84,6 +84,8 @@ class TFT_eSPI_ESPHome : public PollingComponent
         do_update_();
         //spr.pushSprite(0, 0, TFT_TRANSPARENT);
     }
+
+    TFT_eSPI TFT () {return tft;}
   protected:
     void do_init_() {
         if (this->initlambda_.has_value()) {
@@ -95,6 +97,7 @@ class TFT_eSPI_ESPHome : public PollingComponent
             (*this->writer_)(*this);
         }
     }
+    
   private:
     TFT_eSPI tft = TFT_eSPI();
     optional<display_writer_t> initlambda_{};
