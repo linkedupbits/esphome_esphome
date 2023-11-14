@@ -31,11 +31,11 @@ TFT_ESPI = tft_espi_ns.class_("TFT_eSPI",
 TFT_ESPIRef = TFT_ESPI.operator("ref")
 
 def validate_tft_espi(config):
-  """
-  todo: add meaniful validation
-  """
-   return config
-   
+    """
+    todo: add meaniful validation
+    """
+    return config
+
 """
 define the schema 
 """ 
@@ -44,8 +44,7 @@ CONFIG_SCHEMA = cv.Schema(
             cv.Required(CONF_MOSI_PIN): cv.int_,
             cv.Required(CONF_MISO_PIN): cv.int_,
         }
-    ,
-    validate_tdisplays3,
+#    ,validate_tdisplays3,
 ).extend(cv.COMPONENT_SCHEMA)
 
 
