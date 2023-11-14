@@ -22,6 +22,9 @@ from esphome.const import (
     KEY_TARGET_PLATFORM,
     KEY_VARIANT,
     CONF_DATA_RATE,
+    CONF_HEIGHT,
+    CONF_LAMBDA,
+    CONF_WIDTH,    
 )
 
 tft_espi_ns = cg.esphome_ns.namespace("tft_espi")
@@ -41,6 +44,9 @@ define the schema
 """ 
 CONFIG_SCHEMA = cv.Schema(
         {
+            cv.GenerateID(): cv.declare_id(TFT_ESPI),
+            cv.Required(CONF_HEIGHT): cv.int_,
+            cv.Required(CONF_WIDTH): cv.int_,
             cv.Required(CONF_MOSI_PIN): cv.int_,
             cv.Required(CONF_MISO_PIN): cv.int_,
             cv.Required(CONF_CS_PIN): cv.int_,
