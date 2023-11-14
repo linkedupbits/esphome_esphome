@@ -8,17 +8,12 @@
 #include "esphome/core/component.h"
 #include "esphome/core/log.h"
 
-#define BUTTON_W 100
-#define BUTTON_H 50
-// Pause in milliseconds between screens, change to 0 to time font rendering
-#define WAIT 500
-
 namespace esphome {
 namespace tft_espi {
 
 static const char *const TAG = "TFT_eSPI";
 
-class TDisplayS3 : public PollingComponent
+class TFT_eSPI : public PollingComponent
 {
   public:
     void setup() override {
@@ -33,7 +28,7 @@ class TDisplayS3 : public PollingComponent
         tft.setCursor(0, 0);
         tft.setFreeFont(FM9);
         tft.println("\nBooting display ..");
-        ESP_LOGD("tft_espi", "TDisplayS3 width %d height %d ", get_width_internal(), get_height_internal());
+        ESP_LOGD("tft_espi", "TDisplayS3 width %d height %d ", TFT_WIDTH, TFT_HEIGHT);
         //spr.setColorDepth(8); // Optionally set depth to 8 to halve RAM use
         //spr.createSprite(get_width_internal(), get_height_internal());
         // spr.fillSprite(TFT_TRANSPARENT);
@@ -73,7 +68,7 @@ class TDisplayS3 : public PollingComponent
     /////////////
     void update() override {
         ESP_LOGV("tft_espi", "tft_espi update");
-        this->do_update_();
+        
         //spr.pushSprite(0, 0, TFT_TRANSPARENT);
     }
 
