@@ -112,9 +112,9 @@ async def to_code(config):
             config[CONF_LAMBDA], [(TFT_ESPI.operator("ref"), "it")], return_type=cg.void
         )
         cg.add(var.set_writer(lambda_))
-        
+    
     if CONF_INIT_LAMBDA in config:
         lambda_ = await cg.process_lambda(
             config[CONF_INIT_LAMBDA], [(TFT_ESPI.operator("ref"), "it")], return_type=cg.void
         )
-        cg.add(var.set_writer(lambda_))        
+        cg.add(var.set_init(lambda_))        

@@ -44,7 +44,7 @@ class TFT_eSPI_ESPHome : public PollingComponent
 
     }
 
-    void set_init(display_writer_t &&init) { this->init_ = init; }
+    void set_init(display_writer_t &&init) { this->initlambda_ = init; }
     void set_writer(display_writer_t &&writer) { this->writer_ = writer; }
     /// @brief this method prints some text
     void PrintText() {
