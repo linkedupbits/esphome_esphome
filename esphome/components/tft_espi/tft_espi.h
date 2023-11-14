@@ -48,7 +48,7 @@ class TFT_eSPI_ESPHome : public PollingComponent
     void set_writer(display_writer_t &&writer) { this->writer_ = writer; }
     /// @brief this method prints some text
     void PrintText() {
-        tft.setCursor(4, 50);
+        //tft.setCursor(4, 50);
         tft.println("From Lambda ...");
     }
 /*
