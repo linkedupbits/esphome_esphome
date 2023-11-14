@@ -24,7 +24,9 @@ from esphome.const import (
 )
 
 tft_espi_ns = cg.esphome_ns.namespace("tft_espi")
-TFT_ESPI = tft_espi_ns.class_("TFT_eSPI")
+TFT_ESPI = tft_espi_ns.class_("TFT_eSPI",
+ cg.PollingComponent
+)
 TFT_ESPIRef = TFT_ESPI.operator("ref")
 
 def validate_tft_espi(config):
