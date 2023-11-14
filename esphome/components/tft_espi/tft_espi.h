@@ -20,6 +20,7 @@ using display_writer_t = std::function<void(TFT_eSPI_ESPHome &)>;
 class TFT_eSPI_ESPHome : public PollingComponent
 {
   public:
+    TFT_eSPI_ESPHome() : PollingComponent(500) { }
     void setup() override {
         ESP_LOGD("custom", "TDisplayS3 startup");
         tft.begin();
