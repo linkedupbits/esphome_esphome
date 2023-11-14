@@ -3,6 +3,7 @@ import esphome.config_validation as cv
 from esphome.const import (
     CONF_ID,
 )
+from esphome import pins
 from esphome.core.entity_helpers import inherit_property_from
 
 CODEOWNERS = ["@linkedupbits"]
@@ -34,16 +35,18 @@ def validate_tft_espi(config):
   todo: add meaniful validation
   """
    return config
-
-CONFIG_SCHEMA = cv.All(
-     cv.Schema(
+   
+"""
+define the schema 
+""" 
+CONFIG_SCHEMA = cv.Schema(
         {
             cv.Required(CONF_MOSI_PIN): cv.int_,
             cv.Required(CONF_MISO_PIN): cv.int_,
         }
-    ),
+    ,
     validate_tdisplays3,
-)
+).extend(cv.COMPONENT_SCHEMA)
 
 
 async def to_code(config):
