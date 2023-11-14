@@ -7,8 +7,6 @@
 
 #include "esphome/core/component.h"
 #include "esphome/core/log.h"
-#include "esphome/components/display/display_buffer.h"
-#include "esphome/components/display/display_color_utils.h"
 
 #define BUTTON_W 100
 #define BUTTON_H 50
