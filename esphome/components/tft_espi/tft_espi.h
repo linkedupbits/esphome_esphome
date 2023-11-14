@@ -81,7 +81,6 @@ class TFT_eSPI_ESPHome : public PollingComponent
     /////////////
     void update() override {
         ESP_LOGV("tft_espi", "tft_espi update");
-        delay(1000);
         do_update_();
         //spr.pushSprite(0, 0, TFT_TRANSPARENT);
     }
