@@ -25,9 +25,11 @@ class TFT_eSPI_ESPHome : public PollingComponent
         tft.setTextWrap(true, true);
         // Font and background colour, background colour is used for anti-alias blending
         tft.setTextColor(0x55fd, TFT_BLACK);
-        tft.setCursor(0, 0);
+        tft.setCursor(2, 2);
         tft.setFreeFont(FM9);
         tft.println("\nBooting display ..");
+        tft.drawRect(0, 0, TFT_WIDTH, TFT_HEIGHT, TFT_BLUE);
+        tft.drawRect(1, 1, TFT_WIDTH-2, TFT_HEIGHT-2, TFT_BLUE);
         ESP_LOGD("tft_espi", "TDisplayS3 width %d height %d ", TFT_WIDTH, TFT_HEIGHT);
         //spr.setColorDepth(8); // Optionally set depth to 8 to halve RAM use
         //spr.createSprite(get_width_internal(), get_height_internal());
