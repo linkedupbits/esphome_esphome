@@ -51,11 +51,48 @@ CONFIG_SCHEMA = cv.Schema(
 async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
- 
+
+    cg.add_build_flag("-DUSER_SETUP_LOADED=1")
+    # todo: Add driver selection to schema
+    cg.add_build_flag("-DST7796_DRIVER=1")
+    # todo: add dimensions to schema
+    cg.add_build_flag("-DTFT_WIDTH=320")
+    cg.add_build_flag("-DTFT_HEIGHT=480")
+    cg.add_build_flag("-DCONFIG_TFT_MISO=12")
+    cg.add_build_flag("-DTFT_MISO=12")
+    cg.add_build_flag("-DTFT_MOSI=13")
+    cg.add_build_flag("-DTFT_SCLK=14")
+    cg.add_build_flag("-DTFT_CS=15")
+    cg.add_build_flag("-DTFT_DC=2")
+    cg.add_build_flag("-DTFT_RST=-1")
+    
+    
+    cg.add_build_flag("-DLOAD_GLCD=1")
+    cg.add_build_flag("-DLOAD_FONT2=1")
+    cg.add_build_flag("-DLOAD_FONT4=1")
+    cg.add_build_flag("-DLOAD_FONT6=1")
+    cg.add_build_flag("-DLOAD_FONT7=1")
+    cg.add_build_flag("-DLOAD_FONT8=1")
+    cg.add_build_flag("-DLOAD_GFXFF=1")
+    cg.add_build_flag("-DSMOOTH_FONT=1")    
+
+    # If you don't care about control of the backlight you can uncomment the two lines below")
+    cg.add_build_flag("-DTFT_BL=27")
+    cg.add_build_flag("-DTFT_BACKLIGHT_ON=HIGH") # LOW
+
+    cg.add_build_flag("-DSPI_FREQUENCY=65000000")
+    cg.add_build_flag("-DSPI_READ_FREQUENCY=20000000")
+    cg.add_build_flag("-DSPI_TOUCH_FREQUENCY=2500000")
+  
+    cg.add_build_flag("-DTOUCH_CS=33")
+
+
     cg.add_library("SPI", None)
     cg.add_library("FS", None)
     cg.add_library("SPIFFS", None)
     cg.add_library("TFT_eSPI", None)
+    cg.add_library("LittleFS", None)
+
 
     if CONF_LAMBDA in config:
         lambda_ = await cg.process_lambda(
