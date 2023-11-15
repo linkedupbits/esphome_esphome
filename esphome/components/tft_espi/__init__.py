@@ -105,7 +105,7 @@ async def to_code(config):
     cg.add_library("TFT_eSPI", None)
     cg.add_library("LittleFS", None)
 
-    var = cg.new_Pvariable(config[CONF_ID])
+    var = cg.new_Pvariable(config[CONF_TFT_ESPI_ID])
     await cg.register_component(var, config)
 
     if CONF_LAMBDA in config:
