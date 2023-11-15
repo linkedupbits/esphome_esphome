@@ -1,5 +1,6 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
+import logging
 from esphome.components import binary_sensor
 from esphome.const import (
     CONF_ID,
@@ -10,6 +11,9 @@ from esphome.components.tft_espi import (
 )
 
 CODEOWNERS = ["@linkedupbits"]
+
+_LOGGER = logging.getLogger(__name__)
+_LOGGER.info("Test %s...", "a String")
 
 DEPENDENCIES = ["tft_espi"]
 AUTO_LOAD = ["binary_sensor"]
