@@ -25,12 +25,14 @@ CONF_TFT_eSPI_ESPHome_Button_ID = "TFT_eSPI_Widget_Button"
 tft_espi_widgets_ns = cg.esphome_ns.namespace("tft_espi_widgets")
 TFT_eSPI_Button = tft_espi_widgets_ns.class_("TFT_eSPI_ESPHome_Button", binary_sensor.BinarySensor)
 
-CONFIG_SCHEMA = binary_sensor.binary_sensor_schema(TFT_eSPI_Button).extend(
+CONFIG_SCHEMA = binary_sensor.binary_sensor_schema(TFT_eSPI_Button)
+    .extend(cv.COMPONENT_SCHEMA)
+    .extend(
     {
         cv.GenerateID(CONF_TFT_eSPI_ESPHome_Button_ID): cv.use_id(TFT_eSPI_Button),
         cv.GenerateID(CONF_TFT_ESPI_ID): cv.use_id(TFT_ESPI),
     }
-    .extend(cv.COMPONENT_SCHEMA)
+    
 )
 
 # https://gite.lirmm.fr/doccy/TFT_eSPI_Widgets
