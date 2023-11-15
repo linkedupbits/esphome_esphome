@@ -5,13 +5,13 @@ from esphome.const import (
     CONF_ID,
 )
 
-from ../tft_espi import (
+from ../../tft_espi import (
     CONF_TFT_ESPI_ID
 )
 
 CODEOWNERS = ["@linkedupbits"]
 
-#DEPENDENCIES = ["tft_espi"]
+DEPENDENCIES = ["tft_espi"]
 AUTO_LOAD = ["binary_sensor"]
 
 CONF_TFT_eSPI_ESPHome_Button_ID = "TFT_eSPI_Widget_Button"
