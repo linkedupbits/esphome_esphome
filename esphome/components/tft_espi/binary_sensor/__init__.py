@@ -6,6 +6,8 @@ from esphome.const import (
     CONF_ID,
 )
 
+from .. import TFT_ESPI, tft_espi_ns, CONF_TFT_ESPI_ID
+
 from esphome.components.tft_espi import (
     CONF_TFT_ESPI_ID
 )
