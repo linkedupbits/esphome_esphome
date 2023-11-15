@@ -21,9 +21,9 @@ namespace tft_espi_widgets {
             ButtonWidget* btnL; 
            
         public:
-        TFT_eSPI_ESPHome_Button(esphome::tft_espi::TFT_eSPI_ESPHome*& tft) {
-            tft = tft->TFTptr();
-            btnL = new ButtonWidget(tft);
+        TFT_eSPI_ESPHome_Button(esphome::tft_espi::TFT_eSPI_ESPHome*& owner) {
+            this.tft = owner->TFTptr();
+            this.btnL = new ButtonWidget(tft);
         }
 
         void setup() override {
