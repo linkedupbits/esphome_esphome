@@ -5,7 +5,7 @@ from esphome.const import (
     CONF_ID,
 )
 
-from ../../tft_espi import (
+from ./../../tft_espi import (
     CONF_TFT_ESPI_ID
 )
 
