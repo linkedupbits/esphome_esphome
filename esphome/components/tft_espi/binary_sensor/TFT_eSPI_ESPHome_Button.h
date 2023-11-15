@@ -6,12 +6,12 @@
 
 #include <vector>
 
-#include "esphome/tft_espi/tft_espi.h"
+#include "../tft_espi.h"
 
 namespace esphome {
 namespace tft_espi_widgets {
 
-    class TFT_eSPI_ESPHome_Button : public binary_sensor::BinarySensorInitiallyOff  {
+    class TFT_eSPI_ESPHome_Button : public binary_sensor::BinarySensorInitiallyOff , PollingComponent {
         public:
             TFT_eSPI_ESPHome_Button()
     };
