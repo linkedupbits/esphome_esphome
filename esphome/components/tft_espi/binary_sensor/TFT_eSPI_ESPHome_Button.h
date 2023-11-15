@@ -11,7 +11,7 @@
 namespace esphome {
 namespace tft_espi_widgets {
 
-    class TFT_eSPI_ESPHome_Button : public binary_sensor::BinarySensorInitiallyOff , Component {
+    class TFT_eSPI_ESPHome_Button : public binary_sensor::BinarySensorInitiallyOff , public Component {
         public:
         TFT_eSPI_ESPHome_Button(esphome::tft_espi::TFT_eSPI_ESPHome*&) {
             
