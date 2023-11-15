@@ -14,11 +14,11 @@ namespace tft_espi_widgets {
 
     class TFT_eSPI_ESPHome_Button : public binary_sensor::BinarySensorInitiallyOff , public Component {
         private:
-           ButtonWidget* btnL = null; 
+           ButtonWidget* btnL; 
         
         public:
         TFT_eSPI_ESPHome_Button(esphome::tft_espi::TFT_eSPI_ESPHome*& tft) {
-            btnL = new ButtonWidget(tft);
+            btnL = new ButtonWidget(&tft);
         }
     };
 }
