@@ -39,5 +39,5 @@ async def to_code(config):
     cg.add_library("TFT_eSPI_Widgets", None)
     
     espi = await cg.get_variable(config[CONF_TFT_ESPI_ID])
-    var = cg.new_Pvariable(config[], espi)
+    var = cg.new_Pvariable(config[CONF_TFT_eSPI_ESPHome_Button_ID], espi)
     await cg.register_component(var, config)
