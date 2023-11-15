@@ -3,9 +3,9 @@ import esphome.config_validation as cv
 from esphome.components import binary_sensor
 from esphome.const import CONF_ID, CONF_KEY
 
-CONF_TM1637_ID = "tm1637_id"
+CONF_TM1637_ID = "tft_espi_widgets_id"
 
-tm1637_ns = cg.esphome_ns.namespace("tm1637")
+tm1637_ns = cg.esphome_ns.namespace("tft_espi_widgets")
 TM1637Display = tm1637_ns.class_("TM1637Display", cg.PollingComponent)
 TM1637Key = tm1637_ns.class_("TM1637Key", binary_sensor.BinarySensor)
 
