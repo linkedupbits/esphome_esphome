@@ -88,6 +88,7 @@ class TFT_eSPI_ESPHome : public PollingComponent
     }
 
     TFT_eSPI TFT () {return tft;}
+    TFT_eSPI* TFTptr () {return &tft;}
   protected:
     void do_init_() {
         std::lock_guard<std::mutex> guard(lambda_mutex);

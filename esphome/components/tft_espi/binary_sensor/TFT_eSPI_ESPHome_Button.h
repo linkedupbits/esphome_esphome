@@ -18,7 +18,7 @@ namespace tft_espi_widgets {
         
         public:
         TFT_eSPI_ESPHome_Button(esphome::tft_espi::TFT_eSPI_ESPHome*& tft) {
-            btnL = new ButtonWidget(&tft);
+            btnL = new ButtonWidget(tft->TFTptr());
         }
     };
 }
