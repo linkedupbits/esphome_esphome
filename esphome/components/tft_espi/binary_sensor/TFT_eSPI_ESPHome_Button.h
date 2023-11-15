@@ -13,7 +13,7 @@ namespace tft_espi_widgets {
 
     class TFT_eSPI_ESPHome_Button : public binary_sensor::BinarySensorInitiallyOff , PollingComponent {
         public:
-            TFT_eSPI_ESPHome_Button()
+            TFT_eSPI_ESPHome_Button();
     };
 }
 }
