@@ -30,8 +30,8 @@ namespace tft_espi_widgets {
             ESP_LOGD("custom", "TDisplayS3 startup");
             uint16_t x = (tft->width() - BUTTON_W) / 2;
             uint16_t y = tft->height() / 2 - BUTTON_H - 10;
-            btnL.initButtonUL(x, y, BUTTON_W, BUTTON_H, TFT_WHITE, TFT_RED, TFT_BLACK, "Button", 1);
-            btnL.drawSmoothButton(false, 3, TFT_BLACK); // 3 is outline width, TFT_BLACK is the surrounding background colour for anti-aliasing
+            btnL->initButtonUL(x, y, BUTTON_W, BUTTON_H, TFT_WHITE, TFT_RED, TFT_BLACK, "Button", 1);
+            btnL->drawSmoothButton(false, 3, TFT_BLACK); // 3 is outline width, TFT_BLACK is the surrounding background colour for anti-aliasing
         }
     };
 }
