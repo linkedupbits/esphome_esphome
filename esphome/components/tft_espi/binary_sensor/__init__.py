@@ -31,7 +31,6 @@ CONFIG_SCHEMA = cv.All(
     .extend(
         {
             cv.GenerateID(CONF_TFT_eSPI_ESPHome_Button_ID): cv.use_id(TFT_eSPI_Button),
-            cv.GenerateID(CONF_TFT_ESPI_ID): cv.use_id(TFT_ESPI),
         }
     )
 )
