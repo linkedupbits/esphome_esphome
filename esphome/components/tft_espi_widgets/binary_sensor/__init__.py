@@ -1,28 +1,21 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
-from esphome.components import binary_sensor
-from esphome.const import CONF_ID, CONF_KEY
+from esphome.components import uart, sensor
+from esphome.const import CONF_ID, ICON_EMPTY, UNIT_EMPTY
 
-CONF_TM1637_ID = "tft_espi_widgets_id"
+DEPENDENCIES = ['uart']
 
-tm1637_ns = cg.esphome_ns.namespace("tft_espi_widgets")
-TM1637Display = tm1637_ns.class_("TM1637Display", cg.PollingComponent)
-TM1637Key = tm1637_ns.class_("TM1637Key", binary_sensor.BinarySensor)
+empty_uart_sensor_ns = cg.esphome_ns.namespace('tft_espi_widgets')
+EmptyUARTSensor = empty_uart_sensor_ns.class_('EmptyUARTSensor', cg.PollingComponent, uart.UARTDevice)
 
-CONFIG_SCHEMA = binary_sensor.binary_sensor_schema(TM1637Key).extend(
-    {
-        cv.GenerateID(CONF_TM1637_ID): cv.use_id(TM1637Display),
-        cv.Required(CONF_KEY): cv.int_range(min=0, max=15),
-    }
-)
+CONFIG_SCHEMA = sensor.sensor_schema(UNIT_EMPTY, ICON_EMPTY, 1).extend({
+    cv.GenerateID(): cv.declare_id(EmptyUARTSensor),
+}).extend(cv.polling_component_schema('60s')).extend(uart.UART_DEVICE_SCHEMA)
 
-
-async def to_code(config):
+def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
-    await binary_sensor.register_binary_sensor(var, config)
-    cg.add(var.set_keycode(config[CONF_KEY]))
-    hub = await cg.get_variable(config[CONF_TM1637_ID])
-    cg.add(hub.add_tm1637_key(var))
+    yield cg.register_component(var, config)
+
 
 """
 import esphome.codegen as cg
