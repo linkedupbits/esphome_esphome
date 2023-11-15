@@ -5,7 +5,8 @@
 #include "esphome/components/binary_sensor/binary_sensor.h"
 
 #include <vector>
-
+#include "TFT_eSPI.h"              // Hardware-specific library
+#include "TFT_eWidget.h"           // Widget library
 #include "../tft_espi.h"
 
 namespace esphome {
