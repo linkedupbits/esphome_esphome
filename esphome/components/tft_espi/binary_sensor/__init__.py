@@ -8,10 +8,6 @@ from esphome.const import (
 
 from .. import TFT_ESPI, tft_espi_ns, CONF_TFT_ESPI_ID
 
-from esphome.components.tft_espi import (
-    CONF_TFT_ESPI_ID
-)
-
 CODEOWNERS = ["@linkedupbits"]
 
 _LOGGER = logging.getLogger(__name__)
@@ -30,6 +26,7 @@ CONFIG_SCHEMA = cv.All(
     .extend(cv.COMPONENT_SCHEMA)
     .extend(
         {
+            cv.GenerateID(CONF_TFT_eSPI_ESPHome_Button_ID): cv.declare_id(TFT_eSPI_Button),
             cv.GenerateID(CONF_TFT_ESPI_ID): cv.use_id(TFT_ESPI),
         }
     )
@@ -42,5 +39,5 @@ async def to_code(config):
     cg.add_library("TFT_eSPI_Widgets", None)
     
     espi = await cg.get_variable(config[CONF_TFT_ESPI_ID])
-    var = cg.new_Pvariable(config, espi)
+    var = cg.new_Pvariable(config[], espi)
     await cg.register_component(var, config)
