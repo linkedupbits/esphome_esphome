@@ -32,7 +32,11 @@ void TFT_eSPI_ESPHome_Button::Init_Calibration() {
   uint16_t calibrationData[5];
   tft->calibrateTouch(calibrationData, TFT_WHITE, TFT_RED, 15);
   String message = "";
-  message + to_string(calibrationData[0]) + " " + to_string(calibrationData[1]) ; //<< " " << calibrationData[2] << " " << calibrationData[3]<< " " << calibrationData[4];
+  message = String(to_string(calibrationData[0])) 
+            + " " + String(to_string(calibrationData[1]))
+            + " " + String(to_string(calibrationData[2]))
+            + " " + String(to_string(calibrationData[3]))
+            + " " + String(to_string(calibrationData[4])) ; //<< " " << calibrationData[2] << " " << calibrationData[3]<< " " << calibrationData[4];
   ESP_LOGI("TFT_eSPI_ESPHome_Button %s", message.c_str());
   /*
   // check if calibration file exists
