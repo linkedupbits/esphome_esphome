@@ -27,6 +27,7 @@ namespace tft_espi_widgets {
             void PressAction();
             void ReleaseAction();
             void Init_Calibration();
+            uint16_t calibrationData[5];
         public:
         TFT_eSPI_ESPHome_Button(esphome::tft_espi::TFT_eSPI_ESPHome*& owner, uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
             this->tft = owner->TFTptr();
