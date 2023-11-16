@@ -18,11 +18,10 @@ void TFT_eSPI_ESPHome_Button::PressAction()
 
 void TFT_eSPI_ESPHome_Button::ReleaseAction()
 {
-  if (btnL.justReleased()) {
+  if (btnL->justReleased()) {
     ESP_LOGI(TAG, "button just released");
     btnL->drawSmoothButton(false);
     btnL->setReleaseTime(millis());
-    waitTime = 10000;
   }
   else {
     
