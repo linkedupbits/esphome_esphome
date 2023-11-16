@@ -20,7 +20,7 @@ CONF_TFT_eSPI_ESPHome_Button_ID = "TFT_eSPI_Widget_Button"
 CONF_X_POS = "button_x_pos"
 CONF_Y_POS = "button_y_pos"
 CONF_WIDTH = "button_width"
-CONF_WIDTH = "button_height"
+CONF_HEIGHT = "button_height"
 
 tft_espi_widgets_ns = cg.esphome_ns.namespace("tft_espi_widgets")
 TFT_eSPI_Button = tft_espi_widgets_ns.class_("TFT_eSPI_ESPHome_Button", cg.Component,  binary_sensor.BinarySensor)
