@@ -99,7 +99,7 @@ void TFT_eSPI_ESPHome_Button::loop() {
   }
 }
 
-void void TFT_eSPI_ESPHome_Button::configure(esphome::tft_espi::TFT_eSPI_ESPHome*& owner, uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
+void TFT_eSPI_ESPHome_Button::configure(esphome::tft_espi::TFT_eSPI_ESPHome*& owner, uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
       this->tft = owner->TFTptr();
       this->btnL = new ButtonWidget(tft);
       set_position(x, y,  width, height);
