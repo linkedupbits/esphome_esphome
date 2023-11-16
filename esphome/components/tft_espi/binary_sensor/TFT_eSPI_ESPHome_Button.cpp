@@ -13,6 +13,7 @@ void TFT_eSPI_ESPHome_Button::PressAction()
     ESP_LOGI(TAG, "button just pressed");
     btnL->drawSmoothButton(true);
     btnL->drawSmoothButton(!btnL->getState(), 3, TFT_BLACK, btnL->getState() ? "OFF" : "ON");
+    this->publish_state(true);
   }
 }
 
@@ -22,10 +23,12 @@ void TFT_eSPI_ESPHome_Button::ReleaseAction()
     ESP_LOGI(TAG, "button just released");
     btnL->drawSmoothButton(false);
     btnL->setReleaseTime(millis());
+    
   }
   else {
     
   }
+  this->publish_state(false);
 }
 
 void TFT_eSPI_ESPHome_Button::Init_Calibration() {
