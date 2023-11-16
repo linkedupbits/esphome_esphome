@@ -31,7 +31,7 @@ void TFT_eSPI_ESPHome_Button::ReleaseAction()
 void TFT_eSPI_ESPHome_Button::Init_Calibration() {
   uint16_t calibrationData[5];
   tft->calibrateTouch(calibrationData, TFT_WHITE, TFT_RED, 15);
-  string message = "";
+  std::__cxx11::string message = "";
   message = to_string(calibrationData[0])
             + " " + to_string(calibrationData[1])
             + " " + to_string(calibrationData[2])
