@@ -28,6 +28,34 @@ void TFT_eSPI_ESPHome_Button::ReleaseAction()
   }
 }
 
+void TFT_eSPI_ESPHome_Button::Init_Calibration() {
+  uint16_t calibrationData[5];
+  tft->calibrateTouch(calibrationData, TFT_WHITE, TFT_RED, 15);
+  /*
+  // check if calibration file exists
+  if (SPIFFS->exists(CALIBRATION_FILE)) {
+    File f = SPIFFS->open(CALIBRATION_FILE, "r");
+    if (f) {
+      if (f.readBytes((char *)calibrationData, 14) == 14)
+        calDataOK = 1;
+      f.close();
+    }
+  }
+  if (calDataOK) {
+    // calibration data valid
+    tft->setTouch(calibrationData);
+  } else {
+    // data not valid. recalibrate
+    tft->calibrateTouch(calibrationData, TFT_WHITE, TFT_RED, 15);
+    // store data
+    File f = SPIFFS.open(CALIBRATION_FILE, "w");
+    if (f) {
+      f.write((const unsigned char *)calibrationData, 14);
+      f.close();
+    }
+  }
+  */
+}
 
 void TFT_eSPI_ESPHome_Button::loop() {
   static uint32_t scanTime = millis();
@@ -52,6 +80,15 @@ void TFT_eSPI_ESPHome_Button::loop() {
     }
     
   }
+}
+
+void TFT_eSPI_ESPHome_Button::setup() {
+    ESP_LOGD("TFT_eSPI_ESPHome_Button", "setup");
+    Init_Calibration()
+    uint16_t x = x_; //(tft->width() - BUTTON_W) / 2;
+    uint16_t y = y_; //tft->height() / 2 - BUTTON_H - 10;
+    btnL->initButtonUL(x, y, width_, height_, TFT_WHITE, TFT_YELLOW, TFT_BLACK, "Button", 1);
+    btnL->drawSmoothButton(false, 3, TFT_BLACK); // 3 is outline width, TFT_BLACK is the surrounding background colour for anti-aliasing
 }
 /*
 void TFT_eSPI_ESPHome_Button::setup() {
