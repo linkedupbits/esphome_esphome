@@ -40,6 +40,7 @@ void TFT_eSPI_ESPHome_Button::loop() {
     scanTime = millis();
     
     if (pressed) {
+      ESP_LOGI(TAG, "button just pressed %d %d", t_x, t_y);
       if (btnL->contains(t_x, t_y)) {
         btnL->press(true);
         btnL->pressAction();
