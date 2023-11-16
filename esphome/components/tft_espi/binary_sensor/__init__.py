@@ -16,7 +16,6 @@ _LOGGER.info("Test %s...", "a String")
 DEPENDENCIES = ["tft_espi"]
 # AUTO_LOAD = ["binary_sensor"]
 
-CONF_TFT_eSPI_ESPHome_Button_ID = "TFT_eSPI_Widget_Button"
 CONF_POSITION = "position"
 CONF_X_POS = "x"
 CONF_Y_POS = "y"
@@ -31,7 +30,7 @@ CONFIG_SCHEMA = cv.All(
     .extend(cv.COMPONENT_SCHEMA)
     .extend(
         {
-            cv.GenerateID(CONF_TFT_eSPI_ESPHome_Button_ID): cv.declare_id(TFT_eSPI_Button),
+            #cv.GenerateID(CONF_ID): cv.declare_id(TFT_eSPI_Button),
             cv.GenerateID(CONF_TFT_ESPI_ID): cv.use_id(TFT_ESPI),
             cv.Required(CONF_POSITION): cv.Schema ( {
                 cv.Required(CONF_X_POS): cv.positive_int,
@@ -51,7 +50,7 @@ async def to_code(config):
     
     espi = await cg.get_variable(config[CONF_TFT_ESPI_ID])
     position_conf = config[CONF_POSITION]
-    #var = cg.new_Pvariable(config[CONF_TFT_eSPI_ESPHome_Button_ID], espi, position_conf[CONF_X_POS], position_conf[CONF_Y_POS], position_conf[CONF_WIDTH], position_conf[CONF_HEIGHT])
-    var = await binary_sensor.new_binary_sensor(config[CONF_TFT_eSPI_ESPHome_Button_ID])
+    #var = cg.new_Pvariable(config[CONF_ID], espi, position_conf[CONF_X_POS], position_conf[CONF_Y_POS], position_conf[CONF_WIDTH], position_conf[CONF_HEIGHT])
+    var = await binary_sensor.new_binary_sensor(config)
     await cg.register_component(var, config)
     cg.add(var.configure(espi, position_conf[CONF_X_POS], position_conf[CONF_Y_POS], position_conf[CONF_WIDTH], position_conf[CONF_HEIGHT]))
