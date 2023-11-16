@@ -29,7 +29,7 @@ void TFT_eSPI_ESPHome_Button::ReleaseAction()
 }
 
 void TFT_eSPI_ESPHome_Button::Init_Calibration() {
-  
+  tft->setTouch(calibrationData);
   //tft->calibrateTouch(calibrationData, TFT_WHITE, TFT_RED, 15);
   /*
   // check if calibration file exists
