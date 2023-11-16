@@ -80,7 +80,7 @@ void TFT_eSPI_ESPHome_Button::loop() {
       if (btnL->contains(t_x, t_y)) {
         ESP_LOGI(TAG, "Contains");
         btnL->press(true);
-        btnL->pressAction();
+        PressAction();
       }
       else {
         ESP_LOGI(TAG, "Not contains");
@@ -89,7 +89,7 @@ void TFT_eSPI_ESPHome_Button::loop() {
     else {
       if (btnL->isPressed()) {
         btnL->press(false);
-        btnL->releaseAction();
+        ReleaseAction();
       }
     }
     
