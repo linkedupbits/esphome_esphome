@@ -17,6 +17,10 @@ DEPENDENCIES = ["tft_espi"]
 # AUTO_LOAD = ["binary_sensor"]
 
 CONF_TFT_eSPI_ESPHome_Button_ID = "TFT_eSPI_Widget_Button"
+CONF_X_POS = "button_x_pos"
+CONF_Y_POS = "button_y_pos"
+CONF_WIDTH = "button_width"
+CONF_WIDTH = "button_height"
 
 tft_espi_widgets_ns = cg.esphome_ns.namespace("tft_espi_widgets")
 TFT_eSPI_Button = tft_espi_widgets_ns.class_("TFT_eSPI_ESPHome_Button", cg.Component,  binary_sensor.BinarySensor)
@@ -28,6 +32,10 @@ CONFIG_SCHEMA = cv.All(
         {
             cv.GenerateID(CONF_TFT_eSPI_ESPHome_Button_ID): cv.declare_id(TFT_eSPI_Button),
             cv.GenerateID(CONF_TFT_ESPI_ID): cv.use_id(TFT_ESPI),
+            cv.Required(CONF_X_POS): cv.positive_int,
+            cv.Required(CONF_Y_POS): cv.positive_int,
+            cv.Required(CONF_WIDTH): cv.positive_int,
+            cv.Required(CONF_HEIGHT): cv.positive_int,
         }
     )
 )
@@ -39,5 +47,6 @@ async def to_code(config):
     cg.add_library("TFT_eWidget", None)
     
     espi = await cg.get_variable(config[CONF_TFT_ESPI_ID])
-    var = cg.new_Pvariable(config[CONF_TFT_eSPI_ESPHome_Button_ID], espi)
+    var = cg.new_Pvariable(config[CONF_TFT_eSPI_ESPHome_Button_ID], espi, config[CONF_X_POS], config[CONF_X_POS], config[CONF_WIDTH])
     await cg.register_component(var, config)
+    #cg.add(var.set_position(config[CONF_X_POS], config[CONF_X_POS], config[CONF_WIDTH]))
