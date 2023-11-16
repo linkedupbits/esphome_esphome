@@ -76,8 +76,10 @@ void TFT_eSPI_ESPHome_Button::loop() {
       }
     }
     else {
-      btnL->press(false);
-      btnL->releaseAction();
+      if (btnL->isPressed()) {
+        btnL->press(false);
+        btnL->releaseAction();
+      }
     }
     
   }
@@ -89,8 +91,8 @@ void TFT_eSPI_ESPHome_Button::setup() {
     uint16_t x = x_; //(tft->width() - BUTTON_W) / 2;
     uint16_t y = y_; //tft->height() / 2 - BUTTON_H - 10;
     btnL->initButtonUL(x, y, width_, height_, TFT_WHITE, TFT_YELLOW, TFT_BLACK, "Button", 1);
-    btnL->setPressAction(PressAction);
-    btnL->setReleaseAction(ReleaseAction);
+    //btnL->setPressAction(PressAction);
+    //btnL->setReleaseAction(ReleaseAction);
 
     btnL->drawSmoothButton(false, 3, TFT_BLACK); // 3 is outline width, TFT_BLACK is the surrounding background colour for anti-aliasing
 }
