@@ -31,7 +31,7 @@ void TFT_eSPI_ESPHome_Button::ReleaseAction()
 void TFT_eSPI_ESPHome_Button::Init_Calibration() {
   uint16_t calibrationData[5];
   tft->calibrateTouch(calibrationData, TFT_WHITE, TFT_RED, 15);
-  ESP_LOGI("TFT_eSPI_ESPHome_Button %d %d %d %d %d", calibrationData[0], calibrationData[1], calibrationData[2], calibrationData[3], calibrationData[4]);
+  ESP_LOGI("TFT_eSPI_ESPHome_Button %u %u %u %u %u", (unsigned int)calibrationData[0], (unsigned int)calibrationData[1], (unsigned int)calibrationData[2], (unsigned int)calibrationData[3], (unsigned int)calibrationData[4]);
   /*
   // check if calibration file exists
   if (SPIFFS->exists(CALIBRATION_FILE)) {
