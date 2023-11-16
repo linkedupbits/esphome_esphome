@@ -51,6 +51,7 @@ async def to_code(config):
     
     espi = await cg.get_variable(config[CONF_TFT_ESPI_ID])
     position_conf = config[CONF_POSITION]
-    var = cg.new_Pvariable(config[CONF_TFT_eSPI_ESPHome_Button_ID], espi, position_conf[CONF_X_POS], position_conf[CONF_Y_POS], position_conf[CONF_WIDTH], position_conf[CONF_HEIGHT])
+    #var = cg.new_Pvariable(config[CONF_TFT_eSPI_ESPHome_Button_ID], espi, position_conf[CONF_X_POS], position_conf[CONF_Y_POS], position_conf[CONF_WIDTH], position_conf[CONF_HEIGHT])
+    var = await binary_sensor.new_binary_sensor(config[CONF_TFT_eSPI_ESPHome_Button_ID], espi, position_conf[CONF_X_POS], position_conf[CONF_Y_POS], position_conf[CONF_WIDTH], position_conf[CONF_HEIGHT])
     await cg.register_component(var, config)
     #cg.add(var.set_position(config[CONF_X_POS], config[CONF_X_POS], config[CONF_WIDTH]))
