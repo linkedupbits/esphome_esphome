@@ -30,7 +30,7 @@ void TFT_eSPI_ESPHome_Button::ReleaseAction()
 
 void TFT_eSPI_ESPHome_Button::Init_Calibration() {
   
-  tft->calibrateTouch(calibrationData, TFT_WHITE, TFT_RED, 15);
+  //tft->calibrateTouch(calibrationData, TFT_WHITE, TFT_RED, 15);
   /*
   // check if calibration file exists
   if (SPIFFS->exists(CALIBRATION_FILE)) {
@@ -78,8 +78,12 @@ void TFT_eSPI_ESPHome_Button::loop() {
               
       ESP_LOGI(TAG, "button just pressed %d %d", t_x, t_y);
       if (btnL->contains(t_x, t_y)) {
+        ESP_LOGI(TAG, "Contains");
         btnL->press(true);
         btnL->pressAction();
+      }
+      else {
+        ESP_LOGI(TAG, "Not contains");
       }
     }
     else {
