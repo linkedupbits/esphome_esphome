@@ -84,7 +84,7 @@ void TFT_eSPI_ESPHome_Button::loop() {
 
 void TFT_eSPI_ESPHome_Button::setup() {
     ESP_LOGD("TFT_eSPI_ESPHome_Button", "setup");
-    Init_Calibration()
+    Init_Calibration();
     uint16_t x = x_; //(tft->width() - BUTTON_W) / 2;
     uint16_t y = y_; //tft->height() / 2 - BUTTON_H - 10;
     btnL->initButtonUL(x, y, width_, height_, TFT_WHITE, TFT_YELLOW, TFT_BLACK, "Button", 1);
