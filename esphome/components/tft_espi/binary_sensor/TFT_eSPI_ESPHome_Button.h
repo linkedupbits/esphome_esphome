@@ -29,10 +29,8 @@ namespace tft_espi_widgets {
             void Init_Calibration();
             uint16_t calibrationData[5] =  {250,3476,235,3661,2};
         public:
-        TFT_eSPI_ESPHome_Button(esphome::tft_espi::TFT_eSPI_ESPHome*& owner, uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
-            this->tft = owner->TFTptr();
-            this->btnL = new ButtonWidget(tft);
-            set_position(x, y,  width, height);
+        TFT_eSPI_ESPHome_Button() {
+            
         }
         void set_position(uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
             ESP_LOGD("TFT_eSPI_ESPHome_Button", "set_position");
@@ -44,6 +42,7 @@ namespace tft_espi_widgets {
         }
         void setup() override;
         void loop() override;
+        void configure(esphome::tft_espi::TFT_eSPI_ESPHome*& owner, uint16_t x, uint16_t y, uint16_t width, uint16_t height);
     };
 }
 }

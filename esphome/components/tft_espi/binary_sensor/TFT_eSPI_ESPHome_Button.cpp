@@ -99,17 +99,24 @@ void TFT_eSPI_ESPHome_Button::loop() {
   }
 }
 
-void TFT_eSPI_ESPHome_Button::setup() {
-    ESP_LOGD("TFT_eSPI_ESPHome_Button", "setup");
-    Init_Calibration();
-    this->publish_initial_state(false);
-    uint16_t x = x_; //(tft->width() - BUTTON_W) / 2;
-    uint16_t y = y_; //tft->height() / 2 - BUTTON_H - 10;
-    btnL->initButtonUL(x, y, width_, height_, TFT_WHITE, TFT_YELLOW, TFT_BLACK, "Button", 1);
-    //btnL->setPressAction(PressAction);
-    //btnL->setReleaseAction(ReleaseAction);
+void void TFT_eSPI_ESPHome_Button::configure(esphome::tft_espi::TFT_eSPI_ESPHome*& owner, uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
+      this->tft = owner->TFTptr();
+      this->btnL = new ButtonWidget(tft);
+      set_position(x, y,  width, height);
+}
 
-    btnL->drawSmoothButton(false, 3, TFT_BLACK); // 3 is outline width, TFT_BLACK is the surrounding background colour for anti-aliasing
+void TFT_eSPI_ESPHome_Button::setup() {
+    ESP_LOGD(TAG, "setup");
+    if (this->tft) {
+      Init_Calibration();
+      this->publish_initial_state(false);
+      uint16_t x = x_; //(tft->width() - BUTTON_W) / 2;
+      uint16_t y = y_; //tft->height() / 2 - BUTTON_H - 10;
+      btnL->initButtonUL(x, y, width_, height_, TFT_WHITE, TFT_YELLOW, TFT_BLACK, "Button", 1);
+      btnL->drawSmoothButton(false, 3, TFT_BLACK); // 3 is outline width, TFT_BLACK is the surrounding background colour for anti-aliasing
+    } else {
+      ESP_LOGW(TAG, "setup > this->tft is null");
+    }
 }
 /*
 void TFT_eSPI_ESPHome_Button::setup() {
