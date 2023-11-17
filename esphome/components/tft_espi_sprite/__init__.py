@@ -18,6 +18,7 @@ _LOGGER = logging.getLogger(__name__)
 _LOGGER.info("processing %s...", __name__)
 
 DEPENDENCIES = ["tft_espi"]
+AUTO_LOAD = ["tft_espi"]
 
 CONF_ESPI_SPRITES = "sprites"
 CONF_POSITION = "position"
