@@ -32,14 +32,7 @@ namespace tft_espi_widgets {
         TFT_eSPI_ESPHome_Button() {
             
         }
-        void set_position(uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
-            ESP_LOGD("TFT_eSPI_ESPHome_Button", "set_position");
-            //btnL->initButtonUL(x, y, BUTTON_W, BUTTON_H, TFT_WHITE, TFT_YELLOW, TFT_BLACK, "Button", 1);
-            this->x_ = x;
-            this->y_ = y;
-            this->width_ = width;
-            this->height_ = height;
-        }
+        void set_position(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
         void setup() override;
         void loop() override;
         void configure(esphome::tft_espi::TFT_eSPI_ESPHome*& owner, uint16_t x, uint16_t y, uint16_t width, uint16_t height);
