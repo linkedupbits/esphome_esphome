@@ -7,7 +7,7 @@
 #include <vector>
 #include "TFT_eSPI.h"              // Hardware-specific library
 #include "TFT_eWidget.h"           // Widget library
-//#include "../tft_espi/tft_espi.h"
+#include "../tft_espi/tft_espi.h"
 
 //#define BUTTON_W 100
 //#define BUTTON_H 50
@@ -21,8 +21,8 @@ namespace tft_espi_sprite {
             TFT_eSPI* tft;
 
         public:
-            TFT_eSprite_ESPHome(TFT_eSPI* tft) {
-                this->tft = tft;
+            TFT_eSprite_ESPHome(esphome::tft_espi::TFT_eSPI_ESPHome*& owner) {
+                this->tft = owner->TFT();
             }
             void setup() override;
             void loop() override;
