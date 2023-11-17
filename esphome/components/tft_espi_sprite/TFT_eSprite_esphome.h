@@ -21,7 +21,7 @@ namespace tft_espi_sprite {
             TFT_eSPI* tft;
 
         public:
-            TFT_eSprite_ESPHome(TFT_eSPI* tft) : public Component(){
+            TFT_eSprite_ESPHome(TFT_eSPI* tft) {
                 this->tft = tft;
             }
             void setup() override;
