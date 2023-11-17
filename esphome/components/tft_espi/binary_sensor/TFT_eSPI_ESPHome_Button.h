@@ -7,7 +7,7 @@
 #include <vector>
 #include "TFT_eSPI.h"              // Hardware-specific library
 #include "TFT_eWidget.h"           // Widget library
-#include "../tft_espi_espi.h"
+#include "../tft_espi_esphome.h"
 
 //#define BUTTON_W 100
 //#define BUTTON_H 50
