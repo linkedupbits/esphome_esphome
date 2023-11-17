@@ -1,4 +1,5 @@
 #include "tft_espi_esphome.h"
+#include "esphome/core/log.h"
 
 namespace esphome {
 namespace tft_espi {
