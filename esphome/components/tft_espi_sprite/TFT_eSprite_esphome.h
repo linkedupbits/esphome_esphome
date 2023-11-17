@@ -13,12 +13,10 @@
 //#define BUTTON_W 100
 //#define BUTTON_H 50
 
-// Forward Declaration class A
-class esphome::tft_espi::TFT_eSPI_ESPHome;
 
 namespace esphome {
 namespace tft_espi {
-    
+    // Forward Declaration
     class TFT_eSPI_ESPHome;
 }
 namespace tft_espi_sprite {
