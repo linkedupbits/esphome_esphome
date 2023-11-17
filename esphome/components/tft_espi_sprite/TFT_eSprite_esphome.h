@@ -6,9 +6,10 @@
 #include "esphome/core/hal.h"
 //#include "esphome/components/binary_sensor/binary_sensor.h"
 
+#include "../tft_espi/tft_espi_esphome.h"
+
 #include <vector>
 #include "TFT_eSPI.h"              // Hardware-specific library
-#include "../tft_espi/tft_espi_esphome.h"
 
 //#define BUTTON_W 100
 //#define BUTTON_H 50
