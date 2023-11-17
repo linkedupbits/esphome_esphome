@@ -19,6 +19,7 @@ _LOGGER.info("processing %s...", __name__)
 
 DEPENDENCIES = ["tft_espi"]
 
+CONF_ESPI_SPRITES = "sprites"
 CONF_POSITION = "position"
 CONF_X_POS = "x"
 CONF_Y_POS = "y"
@@ -32,13 +33,17 @@ TFT_eSprite_ESPHome = tft_espi_sprite_ns.class_("TFT_eSprite_ESPHome", cg.Compon
 CONFIG_SCHEMA = cv.Schema(
         {
             cv.GenerateID(): cv.declare_id(TFT_ESPI),
-            cv.GenerateID(CONF_TFT_ESPI_ID): cv.use_id(TFT_ESPI),            
-            cv.Required(CONF_POSITION): cv.Schema ( {
-                cv.Required(CONF_X_POS): cv.positive_int,
-                cv.Required(CONF_Y_POS): cv.positive_int,
-                cv.Required(CONF_WIDTH): cv.positive_int,
-                cv.Required(CONF_HEIGHT): cv.positive_int,
-            }),
+            cv.GenerateID(CONF_TFT_ESPI_ID): cv.use_id(TFT_ESPI),
+            cv.Required(CONF_ESPI_SPRITES): cv.ensure_list(
+                cv.Schema( {
+                    cv.Required(CONF_POSITION): cv.Schema ( {
+                        cv.Required(CONF_X_POS): cv.positive_int,
+                        cv.Required(CONF_Y_POS): cv.positive_int,
+                        cv.Required(CONF_WIDTH): cv.positive_int,
+                        cv.Required(CONF_HEIGHT): cv.positive_int,
+                    }),
+                }),
+            ),
         }
 #    ,validate_tdisplays3,
 ).extend(cv.COMPONENT_SCHEMA)
