@@ -17,8 +17,13 @@ namespace tft_espi_sprite {
 // see https://github.com/Bodmer/TFT_eWidget/blob/main/examples/Buttons/Button_demo/Button_demo.ino
 
     class TFT_eSprite_ESPHome : public Component {
+        private:
+            TFT_eSPI* tft;
 
         public:
+            TFT_eSprite_ESPHome(TFT_eSPI* tft) : public Component(){
+                this->tft = tft;
+            }
             void setup() override;
             void loop() override;
     }

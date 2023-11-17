@@ -32,6 +32,7 @@ TFT_eSprite_ESPHome = tft_espi_sprite_ns.class_("TFT_eSprite_ESPHome", cg.Compon
 CONFIG_SCHEMA = cv.Schema(
         {
             cv.GenerateID(): cv.declare_id(TFT_ESPI),
+            cv.GenerateID(CONF_TFT_ESPI_ID): cv.use_id(TFT_ESPI),            
             cv.Required(CONF_POSITION): cv.Schema ( {
                 cv.Required(CONF_X_POS): cv.positive_int,
                 cv.Required(CONF_Y_POS): cv.positive_int,
@@ -43,5 +44,6 @@ CONFIG_SCHEMA = cv.Schema(
 ).extend(cv.COMPONENT_SCHEMA)
 
 async def to_code(config):
-    var = cg.new_Pvariable(config)
+    espi = await cg.get_variable(config[CONF_TFT_ESPI_ID])
+    var = cg.new_Pvariable(config, espi)
     await cg.register_component(var, config)
