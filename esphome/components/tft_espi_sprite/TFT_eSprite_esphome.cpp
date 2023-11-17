@@ -2,7 +2,7 @@
 #include "esphome/core/log.h"
 
 namespace esphome {
-namespace tft_espi_widgets {
+namespace tft_espi_sprite {
 
 static const char *const TAG = "TFT_eSprite_esphome";
 
@@ -14,4 +14,5 @@ void TFT_eSprite_ESPHome::loop() {
     ESP_LOGD(TAG, "loop");
 }
 
+}
 }
