@@ -1,6 +1,6 @@
-#pragma once
-//#ifndef TFT_ESPI
-//#define TFT_ESPI
+#ifndef tft_espi_esphome
+#define tft_espi_esphome
+
 #include <mutex>
 
 #include "Free_Fonts.h"
@@ -93,4 +93,4 @@ class TFT_eSPI_ESPHome : public PollingComponent
 }  // namespace tdisplays3
 }  // namespace esphome
 
-//#endif
+#endif

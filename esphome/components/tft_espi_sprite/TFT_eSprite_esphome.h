@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TFT_eSprite_esphome
+#define TFT_eSprite_esphome
 
 #include "esphome.h"
 #include "esphome/core/component.h"
@@ -30,3 +31,5 @@ namespace tft_espi_sprite {
     };
 }
 }
+
+#endif
