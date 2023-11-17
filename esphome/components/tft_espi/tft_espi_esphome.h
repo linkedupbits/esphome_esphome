@@ -32,31 +32,7 @@ class TFT_eSPI_ESPHome : public PollingComponent
         tft.drawRect(0, 0, TFT_WIDTH, TFT_HEIGHT, TFT_BLUE);
         tft.drawRect(1, 1, TFT_WIDTH-2, TFT_HEIGHT-2, TFT_BLUE);
     }
-/*
-    //////////
-    // DisplayBuffer methods
-    //////////
-    void fill(Color color) override {
-        ESP_LOGD("tft_espi", "TDisplayS3 fill");
-        spr.fillScreen(display::ColorUtil::color_to_565(color));
-    }
 
-    int get_width_internal() override {
-        return tft.getViewportWidth();
-    }
-
-    int get_height_internal() override {
-	return tft.getViewportHeight();
-    }
-
-    display::DisplayType get_display_type() override {
-        return display::DisplayType::DISPLAY_TYPE_COLOR;
-    }
-
-    void draw_absolute_pixel_internal(int x, int y, Color color) override {
-        spr.drawPixel(x, y, display::ColorUtil::color_to_565(color));
-    }
-*/
     /////////////
     // PollingComponent Methods
     /////////////
@@ -90,7 +66,7 @@ class TFT_eSPI_ESPHome : public PollingComponent
 
 };
 
-}  // namespace tdisplays3
+}  // namespace tft_espi
 }  // namespace esphome
 
 #endif

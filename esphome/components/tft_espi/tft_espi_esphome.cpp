@@ -29,5 +29,31 @@ namespace tft_espi {
 
     }
 
+/*
+    //////////
+    // DisplayBuffer methods
+    //////////
+    void fill(Color color) override {
+        ESP_LOGD("tft_espi", "TDisplayS3 fill");
+        spr.fillScreen(display::ColorUtil::color_to_565(color));
+    }
+
+    int get_width_internal() override {
+        return tft.getViewportWidth();
+    }
+
+    int get_height_internal() override {
+	return tft.getViewportHeight();
+    }
+
+    display::DisplayType get_display_type() override {
+        return display::DisplayType::DISPLAY_TYPE_COLOR;
+    }
+
+    void draw_absolute_pixel_internal(int x, int y, Color color) override {
+        spr.drawPixel(x, y, display::ColorUtil::color_to_565(color));
+    }
+*/
+
 }
 }
