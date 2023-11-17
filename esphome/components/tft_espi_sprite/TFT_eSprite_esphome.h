@@ -14,10 +14,6 @@
 
 
 namespace esphome {
-namespace tft_espi {
-    // Forward Declaration
-    class TFT_eSPI_ESPHome;
-}
 namespace tft_espi_sprite {
 // see https://github.com/Bodmer/TFT_eWidget/blob/main/examples/Buttons/Button_demo/Button_demo.ino
 
