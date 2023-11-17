@@ -3,11 +3,10 @@
 #include "esphome.h"
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
-#include "esphome/components/binary_sensor/binary_sensor.h"
+//#include "esphome/components/binary_sensor/binary_sensor.h"
 
 #include <vector>
 #include "TFT_eSPI.h"              // Hardware-specific library
-#include "TFT_eWidget.h"           // Widget library
 #include "../tft_espi/tft_espi_esphome.h"
 
 //#define BUTTON_W 100
