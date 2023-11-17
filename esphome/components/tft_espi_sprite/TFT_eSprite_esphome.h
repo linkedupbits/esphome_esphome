@@ -26,6 +26,6 @@ namespace tft_espi_sprite {
             }
             void setup() override;
             void loop() override;
-    }
-};
+    };
+}
 }
