@@ -8,7 +8,7 @@
 
 #include <vector>
 #include "TFT_eSPI.h"              // Hardware-specific library
-#include "../tft_espi/tft_espi_esphome.h"
+#include "../tft_espi/tft_espi_esphome2.h"
 
 //#define BUTTON_W 100
 //#define BUTTON_H 50
