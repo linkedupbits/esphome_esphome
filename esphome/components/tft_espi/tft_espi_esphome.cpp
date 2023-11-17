@@ -25,32 +25,61 @@ namespace tft_espi {
         do_init_();
     }
 
+    void TFT_eSPI_ESPHome::PrintText() {
+        //tft.setCursor(4, 50);
+        //tft.println("From Lambda ...");
+        tft.drawRect(0, 0, TFT_WIDTH, TFT_HEIGHT, TFT_BLUE);
+        tft.drawRect(1, 1, TFT_WIDTH-2, TFT_HEIGHT-2, TFT_BLUE);
+    }
+
+
+    void TFT_eSPI_ESPHome::update() override {
+        ESP_LOGV("tft_espi", "tft_espi update");
+        do_update_();
+        //spr.pushSprite(0, 0, TFT_TRANSPARENT);
+    }
+
     void TFT_eSPI_ESPHome::loop()  {
 
     }
+
+    void TFT_eSPI_ESPHome::do_init_() {
+        std::lock_guard<std::mutex> guard(lambda_mutex);
+        if (this->initlambda_.has_value()) {
+            (*this->initlambda_)(*this);
+        }
+    }
+
+    void TFT_eSPI_ESPHome::do_update_() {
+        std::lock_guard<std::mutex> guard(lambda_mutex);
+        if (this->writer_.has_value()) {
+            (*this->writer_)(*this);
+        }
+    }
+
 
 /*
     //////////
     // DisplayBuffer methods
     //////////
-    void fill(Color color) override {
+    void TFT_eSPI_ESPHome::fill(Color color) override {
         ESP_LOGD("tft_espi", "TDisplayS3 fill");
         spr.fillScreen(display::ColorUtil::color_to_565(color));
     }
 
-    int get_width_internal() override {
+    int TFT_eSPI_ESPHome::get_width_internal() override {
         return tft.getViewportWidth();
     }
 
-    int get_height_internal() override {
+    int TFT_eSPI_ESPHome::get_height_internal() override {
 	return tft.getViewportHeight();
     }
 
-    display::DisplayType get_display_type() override {
+    display::DisplayType TFT_eSPI_ESPHome::get_display_type() override {
         return display::DisplayType::DISPLAY_TYPE_COLOR;
     }
 
-    void draw_absolute_pixel_internal(int x, int y, Color color) override {
+    void TFT_eSPI_ESPHome::draw_absolute_pixel_internal(int x, int y, Color color) override {
         spr.drawPixel(x, y, display::ColorUtil::color_to_565(color));
     }
 */
