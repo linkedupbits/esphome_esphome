@@ -1,3 +1,4 @@
+#pragma once
 //#ifndef TFT_ESPI
 //#define TFT_ESPI
 #include <mutex>
