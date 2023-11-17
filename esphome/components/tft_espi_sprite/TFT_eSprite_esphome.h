@@ -23,7 +23,7 @@ namespace tft_espi_sprite {
 
         public:
             TFT_eSprite_ESPHome(void** /*tft_espi::TFT_eSPI_ESPHome**/ owner) {
-                this->tft = owner->TFTptr();
+                //this->tft = owner->TFTptr();
             }
             void setup() override;
             void loop() override;
