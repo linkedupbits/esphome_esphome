@@ -51,7 +51,7 @@ CONFIG_SCHEMA = cv.Schema(
 async def to_code(config):
     cg.add_library("TFT_eSPI", None)
     cg.add_library("TFT_eWidget", None)
-
+    
     espi = await cg.get_variable(config[CONF_TFT_ESPI_ID])
     var = cg.new_Pvariable(config[CONF_ID], espi)
     await cg.register_component(var, config)
