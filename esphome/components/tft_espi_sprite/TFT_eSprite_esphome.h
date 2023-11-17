@@ -1,13 +1,13 @@
 #ifndef TFT_eSprite_esphome
 #define TFT_eSprite_esphome
 
-#include "esphome.h"
+//#include "esphome.h"
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 //#include "esphome/components/binary_sensor/binary_sensor.h"
 
 #include <vector>
-#include "TFT_eSPI.h"              // Hardware-specific library
+#include <TFT_eSPI>              // Hardware-specific library
 #include "../tft_espi/tft_espi_esphome.h"
 
 //#define BUTTON_W 100
