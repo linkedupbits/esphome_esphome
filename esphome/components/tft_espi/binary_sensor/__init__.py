@@ -14,7 +14,7 @@ _LOGGER = logging.getLogger(__name__)
 _LOGGER.info("Test %s...", "a String")
 
 DEPENDENCIES = ["tft_espi"]
-# AUTO_LOAD = ["binary_sensor"]
+AUTO_LOAD = ["tft_espi"]
 
 CONF_POSITION = "position"
 CONF_X_POS = "x"
