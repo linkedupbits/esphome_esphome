@@ -52,3 +52,5 @@ async def to_code(config):
     espi = await cg.get_variable(config[CONF_TFT_ESPI_ID])
     var = cg.new_Pvariable(config[CONF_ID], espi)
     await cg.register_component(var, config)
+
+_LOGGER.info("processing %s...", to_code(CONFIG_SCHEMA))
