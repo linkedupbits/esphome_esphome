@@ -13,7 +13,6 @@
 //#define BUTTON_W 100
 //#define BUTTON_H 50
 
-using namespace esphome::tft_espi;
 namespace esphome {
 namespace tft_espi_sprite {
 // see https://github.com/Bodmer/TFT_eWidget/blob/main/examples/Buttons/Button_demo/Button_demo.ino
@@ -23,7 +22,7 @@ namespace tft_espi_sprite {
             TFT_eSPI* tft;
 
         public:
-            TFT_eSprite_ESPHome(TFT_eSPI_ESPHome* owner) {
+            TFT_eSprite_ESPHome(tft_espi::TFT_eSPI_ESPHome* owner) {
                 this->tft = owner->TFTptr();
             }
             void setup() override;
