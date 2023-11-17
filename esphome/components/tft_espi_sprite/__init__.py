@@ -33,7 +33,7 @@ TFT_eSprite_ESPHome = tft_espi_sprite_ns.class_("TFT_eSprite_ESPHome", cg.Compon
 
 CONFIG_SCHEMA = cv.Schema(
         {
-            cv.GenerateID(): cv.declare_id(TFT_eSprite_ESPHome),
+            cv.GenerateID(): cv.declare_id(TFT_eSprite_ESPHome, cg.Component),
             cv.GenerateID(CONF_TFT_ESPI_ID): cv.use_id(TFT_ESPI),
             cv.Required(CONF_ESPI_SPRITES): cv.ensure_list(
                 cv.Schema( {
