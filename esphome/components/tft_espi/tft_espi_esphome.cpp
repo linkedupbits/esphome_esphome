@@ -33,7 +33,7 @@ namespace tft_espi {
     }
 
 
-    void TFT_eSPI_ESPHome::update() override {
+    void TFT_eSPI_ESPHome::update()  {
         ESP_LOGV("tft_espi", "tft_espi update");
         do_update_();
         //spr.pushSprite(0, 0, TFT_TRANSPARENT);
