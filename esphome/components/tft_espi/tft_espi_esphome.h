@@ -12,8 +12,6 @@
 namespace esphome {
 namespace tft_espi {
 
-static const char *const TAG = "TFT_eSPI";
-
 class TFT_eSPI_ESPHome;
 using display_writer_t = std::function<void(TFT_eSPI_ESPHome &)>;
 

@@ -3,6 +3,8 @@
 namespace esphome {
 namespace tft_espi {
 
+    static const char *const TAG = "TFT_eSPI";
+
     void TFT_eSPI_ESPHome::setup()  {
         ESP_LOGD("custom", "TDisplayS3 startup");
         tft.begin();
