@@ -1,6 +1,6 @@
 #pragma once
 
-#include "esphome/esphome.h"
+#include "esphome.h"
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 #include "esphome/components/binary_sensor/binary_sensor.h"
