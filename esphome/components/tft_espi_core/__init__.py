@@ -18,7 +18,7 @@ from esphome.const import (
 
 CODEOWNERS = ["@linkedupbits"]
 CONF_INIT_LAMBDA = "init"
-CONF_TFT_ESPI_ID = "tft_espi"
+CONF_TFT_ESPI_ID = "tft_espi_core"
 
 tft_espi_ns = cg.esphome_ns.namespace("tft_espi_core")
 TFT_ESPI = tft_espi_ns.class_("TFT_eSPI_ESPHome", cg.PollingComponent)
