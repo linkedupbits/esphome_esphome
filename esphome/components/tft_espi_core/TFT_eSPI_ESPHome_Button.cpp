@@ -23,10 +23,10 @@ void TFT_eSPI_ESPHome_Button::ReleaseAction()
     ESP_LOGI(TAG, "button just released");
     btnL->drawSmoothButton(false);
     btnL->setReleaseTime(millis());
-    
+
   }
   else {
-    
+
   }
   this->publish_state(false);
 }
@@ -69,7 +69,7 @@ void TFT_eSPI_ESPHome_Button::loop() {
     // Pressed will be set true if there is a valid touch on the screen
     bool pressed = tft->getTouch(&t_x, &t_y);
     scanTime = millis();
-    
+
     if (pressed) {
       std::__cxx11::string message = "";
         message = to_string(calibrationData[0])
@@ -78,7 +78,7 @@ void TFT_eSPI_ESPHome_Button::loop() {
                   + " " + to_string(calibrationData[3])
                   + " " + to_string(calibrationData[4]) ; //<< " " << calibrationData[2] << " " << calibrationData[3]<< " " << calibrationData[4];
         ESP_LOGI("Calibration %s", message.c_str());
-              
+
       ESP_LOGI(TAG, "button just pressed %d %d", t_x, t_y);
       if (btnL->contains(t_x, t_y)) {
         ESP_LOGI(TAG, "Contains");
@@ -95,11 +95,11 @@ void TFT_eSPI_ESPHome_Button::loop() {
         ReleaseAction();
       }
     }
-    
+
   }
 }
 
-void TFT_eSPI_ESPHome_Button::configure(esphome::tft_espi::TFT_eSPI_ESPHome*& owner, uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
+void TFT_eSPI_ESPHome_Button::configure(esphome::tft_espi_core::TFT_eSPI_ESPHome*& owner, uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
       this->tft = owner->TFTptr();
       this->btnL = new ButtonWidget(tft);
       set_position(x, y,  width, height);

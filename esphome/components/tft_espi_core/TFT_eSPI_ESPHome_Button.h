@@ -35,7 +35,7 @@ namespace tft_espi_widgets {
         void set_position(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
         void setup() override;
         void loop() override;
-        void configure(esphome::tft_espi::TFT_eSPI_ESPHome*& owner, uint16_t x, uint16_t y, uint16_t width, uint16_t height);
+        void configure(esphome::tft_espi_core::TFT_eSPI_ESPHome*& owner, uint16_t x, uint16_t y, uint16_t width, uint16_t height);
     };
 }
 }
