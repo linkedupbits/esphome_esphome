@@ -2,7 +2,7 @@
 #include "esphome/core/log.h"
 
 namespace esphome {
-namespace tft_espi {
+namespace tft_espi_core {
 
     static const char *const TAG = "TFT_eSPI";
 

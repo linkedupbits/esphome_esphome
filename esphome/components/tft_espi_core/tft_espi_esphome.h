@@ -5,13 +5,12 @@
 
 #include "Free_Fonts.h"
 #include "TFT_eSPI.h"
-#include "esphome.h"
 
 #include "esphome/core/component.h"
 #include "esphome/core/log.h"
 
 namespace esphome {
-namespace tft_espi {
+namespace tft_espi_core {
 
 class TFT_eSPI_ESPHome;
 using display_writer_t = std::function<void(TFT_eSPI_ESPHome &)>;
@@ -38,7 +37,7 @@ class TFT_eSPI_ESPHome : public PollingComponent
   protected:
     void do_init_();
     void do_update_();
-    
+
   private:
     std::mutex lambda_mutex;
     TFT_eSPI tft = TFT_eSPI();

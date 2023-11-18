@@ -6,10 +6,9 @@
 #include "esphome/core/hal.h"
 //#include "esphome/components/binary_sensor/binary_sensor.h"
 
-#include "../tft_espi/tft_espi_esphome.h"
-
 #include <vector>
 #include "TFT_eSPI.h"              // Hardware-specific library
+#include "tft_espi_esphome.h"
 
 //#define BUTTON_W 100
 //#define BUTTON_H 50
@@ -23,7 +22,7 @@ namespace tft_espi_sprite {
             TFT_eSPI* tft;
 
         public:
-            TFT_eSprite_ESPHome(esphome::tft_espi::TFT_eSPI_ESPHome*& owner) {
+            TFT_eSprite_ESPHome(esphome::tft_espi_core::TFT_eSPI_ESPHome*& owner) {
                 //this->tft = owner->TFTptr();
             }
             void setup() override;

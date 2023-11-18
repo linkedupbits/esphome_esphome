@@ -1,16 +1,11 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 import logging
-from esphome.components import binary_sensor
 from esphome.const import (
     CONF_ID,
 )
 
-from esphome.components.tft_espi import (
-    TFT_ESPI, 
-    tft_espi_ns, 
-    CONF_TFT_ESPI_ID
-)
+from esphome.components.tft_espi_core import TFT_ESPI, CONF_TFT_ESPI_ID
 
 CODEOWNERS = ["@linkedupbits"]
 
@@ -33,24 +28,28 @@ TFT_eSprite_ESPHome = tft_espi_sprite_ns.class_("TFT_eSprite_ESPHome", cg.Compon
 
 
 CONFIG_SCHEMA = cv.Schema(
-        {
-            cv.GenerateID(): cv.declare_id(TFT_eSprite_ESPHome),
-            cv.GenerateID(CONF_TFT_ESPI_ID): cv.use_id(TFT_ESPI),
-            cv.Required(CONF_POSITION): cv.Schema ( {
+    {
+        cv.GenerateID(): cv.declare_id(TFT_eSprite_ESPHome),
+        cv.GenerateID(CONF_TFT_ESPI_ID): cv.use_id(TFT_ESPI),
+        cv.Required(CONF_POSITION): cv.Schema(
+            {
                 cv.Required(CONF_X_POS): cv.positive_int,
                 cv.Required(CONF_Y_POS): cv.positive_int,
                 cv.Required(CONF_WIDTH): cv.positive_int,
                 cv.Required(CONF_HEIGHT): cv.positive_int,
-            }),
-        }
-#    ,validate_tdisplays3,
+            }
+        ),
+    }
+    #    ,validate_tdisplays3,
 ).extend(cv.COMPONENT_SCHEMA)
+
 
 async def to_code(config):
     cg.add_library("TFT_eSPI", None)
-    
+    #    cg.add_platformio_option("lib_ldf_mode", "chain+")
     espi = await cg.get_variable(config[CONF_TFT_ESPI_ID])
     var = cg.new_Pvariable(config[CONF_ID], espi)
     await cg.register_component(var, config)
+
 
 _LOGGER.info("processing %s...", to_code(CONFIG_SCHEMA))
