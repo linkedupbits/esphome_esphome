@@ -4,16 +4,17 @@ import logging
 from esphome.const import (
     CONF_ID,
 )
-
 from esphome.components.tft_espi_core import TFT_ESPI, CONF_TFT_ESPI_ID
+
 
 CODEOWNERS = ["@linkedupbits"]
 
 _LOGGER = logging.getLogger(__name__)
 _LOGGER.info("processing %s...", __name__)
 
-DEPENDENCIES = ["tft_espi"]
-AUTO_LOAD = ["tft_espi"]
+
+AUTO_LOAD = ["tft_espi_core"]
+DEPENDENCIES = ["tft_espi_core"]
 MULTI_CONF = True
 
 CONF_ESPI_SPRITES = "sprites"
