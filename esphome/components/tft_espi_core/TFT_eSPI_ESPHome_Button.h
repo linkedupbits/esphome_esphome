@@ -7,7 +7,7 @@
 #include <vector>
 #include "TFT_eSPI.h"              // Hardware-specific library
 #include "TFT_eWidget.h"           // Widget library
-#include "esphome/components/tft_espi/tft_espi_esphome.h"
+#include "tft_espi_esphome.h"
 
 //#define BUTTON_W 100
 //#define BUTTON_H 50
@@ -19,7 +19,7 @@ namespace tft_espi_widgets {
     class TFT_eSPI_ESPHome_Button : public binary_sensor::BinarySensorInitiallyOff , public Component {
         private:
             TFT_eSPI* tft;
-            ButtonWidget* btnL; 
+            ButtonWidget* btnL;
             uint16_t x_;
             uint16_t y_;
             uint16_t width_;
@@ -30,7 +30,7 @@ namespace tft_espi_widgets {
             uint16_t calibrationData[5] =  {250,3476,235,3661,2};
         public:
         TFT_eSPI_ESPHome_Button() {
-            
+
         }
         void set_position(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
         void setup() override;
