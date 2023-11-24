@@ -1,9 +1,16 @@
 #pragma once
 
-#include <Arduino.h>
-#include <Wire.h>
+//#include <Arduino.h>
+//#include <Wire.h>
+#include "esphome/core/component.h"
+#include "esphome/core/hal.h"
+#include "esphome/components/sensor/sensor.h"
+#include "esphome/components/i2c/i2c.h"
 
-class VL53L1X
+namespace esphome {
+namespace vl53l1x {
+
+class VL53L1X : public sensor::Sensor, public PollingComponent, public i2c::I2CDevice
 {
   public:
 
@@ -1269,11 +1276,16 @@ class VL53L1X
     RangingData ranging_data;
 
     uint8_t last_status; // status of last I2C transmission
+    i2c::I2CBus *i2c_bus = NULL;
+    VL53L1X(uint32_t update_interval, i2c::I2CBus *i2c);
 
-    VL53L1X();
+    /// ESPHome
+    ///
+    void setup() override;
+    void update() override;
 
-    void setBus(TwoWire * bus) { this->bus = bus; }
-    TwoWire * getBus() { return bus; }
+    //void setBus(TwoWire * bus) { this->bus = bus; }
+    //TwoWire * getBus() { return bus; }
 
     void setAddress(uint8_t new_addr);
     uint8_t getAddress() { return address; }
@@ -1358,7 +1370,7 @@ class VL53L1X
     // I2C buses)
     ResultBuffer results;
 
-    TwoWire * bus;
+    //TwoWire * bus;
 
     uint8_t address;
 
@@ -1395,3 +1407,6 @@ class VL53L1X
     // Convert count rate from fixed point 9.7 format to float
     float countRateFixedToFloat(uint16_t count_rate_fixed) { return (float)count_rate_fixed / (1 << 7); }
 };
+
+}
+}
