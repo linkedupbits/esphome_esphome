@@ -15,7 +15,7 @@ DEPENDENCIES = ["i2c"]
 
 vl53l1x_ns = cg.esphome_ns.namespace("vl53l1x")
 VL53L1XSensor = vl53l1x_ns.class_(
-    "VL53L1XSensor", sensor.Sensor, cg.PollingComponent, i2c.I2CDevice
+    "VL53L1X", sensor.Sensor, cg.PollingComponent, i2c.I2CDevice
 )
 
 CONF_SIGNAL_RATE_LIMIT = "signal_rate_limit"
