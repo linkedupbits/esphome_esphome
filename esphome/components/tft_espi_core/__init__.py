@@ -2,7 +2,7 @@ import esphome.codegen as cg
 import esphome.config_validation as cv
 
 from esphome.const import (
-    #    CONF_ID,
+    CONF_ID,
     CONF_CLK_PIN,
     CONF_MISO_PIN,
     CONF_MOSI_PIN,
@@ -35,21 +35,22 @@ def validate_tft_espi(config):
 """
 define the schema
 """
-CONFIG_SCHEMA = cv.Schema(
-    {
-        cv.GenerateID(CONF_TFT_ESPI_ID): cv.declare_id(TFT_ESPI),
-        cv.Required(CONF_HEIGHT): cv.int_,
-        cv.Required(CONF_WIDTH): cv.int_,
-        cv.Required(CONF_MOSI_PIN): cv.int_,
-        cv.Required(CONF_MISO_PIN): cv.int_,
-        cv.Required(CONF_CS_PIN): cv.int_,
-        cv.Required(CONF_CLK_PIN): cv.int_,
-        cv.Required(CONF_DC_PIN): cv.int_,
-        cv.Optional(CONF_LAMBDA): cv.lambda_,
-        cv.Optional(CONF_INIT_LAMBDA): cv.lambda_,
-    }
-    #    ,validate_tdisplays3,
-).extend(cv.COMPONENT_SCHEMA)
+CONFIG_SCHEMA = cv.All(
+    cv.Schema(
+        {
+            cv.GenerateID(): cv.declare_id(TFT_ESPI),
+            cv.Required(CONF_HEIGHT): cv.int_,
+            cv.Required(CONF_WIDTH): cv.int_,
+            cv.Required(CONF_MOSI_PIN): cv.int_,
+            cv.Required(CONF_MISO_PIN): cv.int_,
+            cv.Required(CONF_CS_PIN): cv.int_,
+            cv.Required(CONF_CLK_PIN): cv.int_,
+            cv.Required(CONF_DC_PIN): cv.int_,
+            cv.Optional(CONF_LAMBDA): cv.lambda_,
+            cv.Optional(CONF_INIT_LAMBDA): cv.lambda_,
+        }
+    ).extend(cv.COMPONENT_SCHEMA)
+)
 
 
 async def to_code(config):
@@ -92,7 +93,7 @@ async def to_code(config):
     cg.add_library("TFT_eSPI", None)
     cg.add_library("LittleFS", None)
 
-    var = cg.new_Pvariable(config[CONF_TFT_ESPI_ID])
+    var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
 
     if CONF_LAMBDA in config:
