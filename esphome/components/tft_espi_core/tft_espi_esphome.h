@@ -8,6 +8,7 @@
 
 #include "esphome/core/component.h"
 #include "esphome/core/log.h"
+#include "esphome/core/helpers.h"
 
 namespace esphome {
 namespace tft_espi_core {
@@ -15,38 +16,38 @@ namespace tft_espi_core {
 class TFT_eSPI_ESPHome;
 using display_writer_t = std::function<void(TFT_eSPI_ESPHome &)>;
 
-class TFT_eSPI_ESPHome : public PollingComponent
-{
-  public:
-    TFT_eSPI_ESPHome() : PollingComponent(500) { }
-    void setup() override;
-    void loop() override;
+class TFT_eSPI_ESPHome : public PollingComponent {
+ public:
+  TFT_eSPI_ESPHome() : PollingComponent(500) {}
+  void setup() override;
+  void loop() override;
 
-    void set_init(display_writer_t &&init) { this->initlambda_ = init; }
-    void set_writer(display_writer_t &&writer) { this->writer_ = writer; }
-    /// @brief this method prints some text
-    void PrintText();
+  void set_init(display_writer_t &&init) { this->initlambda_ = init; }
+  void set_writer(display_writer_t &&writer) { this->writer_ = writer; }
+  /// @brief this method prints some text
+  void PrintText();
 
-    /////////////
-    // PollingComponent Methods
-    /////////////
-    void update() override;
+  /////////////
+  // PollingComponent Methods
+  /////////////
+  void update() override;
 
-    TFT_eSPI TFT () {return tft;}
-    TFT_eSPI* TFTptr () {return &tft;}
-  protected:
-    void do_init_();
-    void do_update_();
+  TFT_eSPI TFT() { return tft; }
+  TFT_eSPI *TFTptr() { return &tft; }
 
-  private:
-    std::mutex lambda_mutex;
-    TFT_eSPI tft = TFT_eSPI();
-    optional<display_writer_t> initlambda_{};
-    optional<display_writer_t> writer_{};
+ protected:
+  void do_init_();
+  void do_update_();
+  uint16_t calibrationData[5] = {250, 3476, 235, 3661, 2};
 
+ private:
+  std::mutex lambda_mutex;
+  TFT_eSPI tft = TFT_eSPI();
+  optional<display_writer_t> initlambda_{};
+  optional<display_writer_t> writer_{};
 };
 
-}  // namespace tft_espi
+}  // namespace tft_espi_core
 }  // namespace esphome
 
 #endif
