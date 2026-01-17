@@ -1,17 +1,18 @@
-import esphome.codegen as cg
-import esphome.config_validation as cv
 from esphome import pins
+import esphome.codegen as cg
 from esphome.components import i2c
+import esphome.config_validation as cv
 from esphome.const import (
     CONF_ID,
     CONF_INPUT,
-    CONF_NUMBER,
-    CONF_MODE,
     CONF_INVERTED,
+    CONF_MODE,
+    CONF_NUMBER,
     CONF_OUTPUT,
 )
 
-CODEOWNERS = ["@hwstar", "@clydebarrow"]
+CODEOWNERS = ["@hwstar", "@clydebarrow", "@bdraco"]
+AUTO_LOAD = ["gpio_expander"]
 DEPENDENCIES = ["i2c"]
 MULTI_CONF = True
 CONF_PIN_COUNT = "pin_count"
@@ -52,20 +53,15 @@ def validate_mode(value):
     return value
 
 
-PCA9554_PIN_SCHEMA = cv.All(
+PCA9554_PIN_SCHEMA = pins.gpio_base_schema(
+    PCA9554GPIOPin,
+    cv.int_range(min=0, max=15),
+    modes=[CONF_INPUT, CONF_OUTPUT],
+    mode_validator=validate_mode,
+).extend(
     {
-        cv.GenerateID(): cv.declare_id(PCA9554GPIOPin),
         cv.Required(CONF_PCA9554): cv.use_id(PCA9554Component),
-        cv.Required(CONF_NUMBER): cv.int_range(min=0, max=15),
-        cv.Optional(CONF_MODE, default={}): cv.All(
-            {
-                cv.Optional(CONF_INPUT, default=False): cv.boolean,
-                cv.Optional(CONF_OUTPUT, default=False): cv.boolean,
-            },
-            validate_mode,
-        ),
-        cv.Optional(CONF_INVERTED, default=False): cv.boolean,
-    },
+    }
 )
 
 

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "esphome/core/log.h"
 #include "esphome/core/helpers.h"
-#include "ndef_record.h"
+#include "esphome/core/log.h"
 #include "ndef_message.h"
+#include "ndef_record.h"
 #include "nfc_tag.h"
 
 #include <vector>
@@ -53,8 +53,22 @@ static const uint8_t DEFAULT_KEY[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 static const uint8_t NDEF_KEY[6] = {0xD3, 0xF7, 0xD3, 0xF7, 0xD3, 0xF7};
 static const uint8_t MAD_KEY[6] = {0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5};
 
-std::string format_uid(std::vector<uint8_t> &uid);
-std::string format_bytes(std::vector<uint8_t> &bytes);
+/// Max UID size is 10 bytes, formatted as "XX-XX-XX-XX-XX-XX-XX-XX-XX-XX\0" = 30 chars
+static constexpr size_t FORMAT_UID_BUFFER_SIZE = 30;
+/// Format UID to buffer with '-' separator (e.g., "04-11-22-33"). Returns buffer for inline use.
+char *format_uid_to(char *buffer, const std::vector<uint8_t> &uid);
+
+/// Buffer size for format_bytes_to (64 bytes max = 192 chars with space separator)
+static constexpr size_t FORMAT_BYTES_BUFFER_SIZE = 192;
+/// Format bytes to buffer with ' ' separator (e.g., "04 11 22 33"). Returns buffer for inline use.
+char *format_bytes_to(char *buffer, const std::vector<uint8_t> &bytes);
+
+// Remove before 2026.6.0
+ESPDEPRECATED("Use format_uid_to() with stack buffer instead. Removed in 2026.6.0", "2025.12.0")
+std::string format_uid(const std::vector<uint8_t> &uid);
+// Remove before 2026.6.0
+ESPDEPRECATED("Use format_bytes_to() with stack buffer instead. Removed in 2026.6.0", "2025.12.0")
+std::string format_bytes(const std::vector<uint8_t> &bytes);
 
 uint8_t guess_tag_type(uint8_t uid_length);
 uint8_t get_mifare_classic_ndef_start_index(std::vector<uint8_t> &data);
@@ -65,6 +79,20 @@ bool mifare_classic_is_first_block(uint8_t block_num);
 bool mifare_classic_is_trailer_block(uint8_t block_num);
 
 uint32_t get_mifare_ultralight_buffer_size(uint32_t message_length);
+
+class NfcTagListener {
+ public:
+  virtual void tag_off(NfcTag &tag) {}
+  virtual void tag_on(NfcTag &tag) {}
+};
+
+class Nfcc {
+ public:
+  void register_listener(NfcTagListener *listener) { this->tag_listeners_.push_back(listener); }
+
+ protected:
+  std::vector<NfcTagListener *> tag_listeners_;
+};
 
 }  // namespace nfc
 }  // namespace esphome

@@ -16,7 +16,6 @@ static const uint16_t BIT_ZERO_LOW_US = BITWISE;
 static const uint16_t TRAILER = BITWISE;
 
 void AEHAProtocol::encode(RemoteTransmitData *dst, const AEHAData &data) {
-  dst->set_carrier_frequency(38000);
   dst->reserve(2 + 32 + (data.data.size() * 2) + 1);
 
   dst->item(HEADER_HIGH_US, HEADER_LOW_US);
@@ -86,8 +85,8 @@ optional<AEHAData> AEHAProtocol::decode(RemoteReceiveData src) {
 std::string AEHAProtocol::format_data_(const std::vector<uint8_t> &data) {
   std::string out;
   for (uint8_t byte : data) {
-    char buf[6];
-    sprintf(buf, "0x%02X,", byte);
+    char buf[8];  // "0x%02X," = 5 chars + null + margin
+    snprintf(buf, sizeof(buf), "0x%02X,", byte);
     out += buf;
   }
   out.pop_back();

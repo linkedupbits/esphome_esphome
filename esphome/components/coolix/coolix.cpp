@@ -102,11 +102,7 @@ void CoolixClimate::transmit_state() {
     }
   }
   ESP_LOGV(TAG, "Sending coolix code: 0x%06" PRIX32, remote_state);
-
-  auto transmit = this->transmitter_->transmit();
-  auto *data = transmit.get_data();
-  remote_base::CoolixProtocol().encode(data, remote_state);
-  transmit.perform();
+  this->transmit_<remote_base::CoolixProtocol>(remote_state);
 }
 
 bool CoolixClimate::on_coolix(climate::Climate *parent, remote_base::RemoteReceiveData data) {
@@ -135,8 +131,9 @@ bool CoolixClimate::on_coolix(climate::Climate *parent, remote_base::RemoteRecei
       } else {
         parent->mode = climate::CLIMATE_MODE_FAN_ONLY;
       }
-    } else
+    } else {
       parent->mode = climate::CLIMATE_MODE_COOL;
+    }
 
     // Fan Speed
     if ((remote_state & COOLIX_FAN_AUTO) == COOLIX_FAN_AUTO || parent->mode == climate::CLIMATE_MODE_HEAT_COOL ||
