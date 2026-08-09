@@ -1,0 +1,15 @@
+vl53l1x:
+  - id: vl53l1x_hub
+    i2c_id: i2c_bus
+    address: 0x29
+    enable_pin: 3
+
+sensor:
+  - platform: vl53l1x
+    vl53l1x_id: vl53l1x_hub
+    name: VL53L1x Distance
+
+text_sensor:
+  - platform: vl53l1x
+    vl53l1x_id: vl53l1x_hub
+    name: VL53L1x Distance Mode

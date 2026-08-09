@@ -1,0 +1,62 @@
+vl53l1x:
+  - id: vl53l1x_hub
+    i2c_id: i2c_bus
+    address: 0x29
+    enable_pin: GPIO3
+    timeout: 200us
+    distance_mode: long
+    timing_budget: 50ms
+    update_interval: 60s
+    offset_mm: 5
+    xtalk_cps: 100
+    output_errors_and_warnings: true
+    roi_width: 8
+    roi_height: 8
+    roi_center_spad: 199
+    signal_threshold: 1.5
+    sigma_threshold: 90
+    distance_threshold:
+      low: 100
+      high: 1000
+      window: inside_window
+      report_no_target: false
+
+sensor:
+  - platform: vl53l1x
+    vl53l1x_id: vl53l1x_hub
+    name: VL53L1x Distance
+    timing_budget_sensor:
+      name: VL53L1x Timing Budget
+    timeout_sensor:
+      name: VL53L1x Timeout
+    calibrated_offset_sensor:
+      name: VL53L1x Calibrated Offset
+    calibrated_xtalk_sensor:
+      name: VL53L1x Calibrated Xtalk
+
+text_sensor:
+  - platform: vl53l1x
+    vl53l1x_id: vl53l1x_hub
+    name: VL53L1x Distance Mode
+    error_sensor:
+      name: VL53L1x Error
+
+interval:
+  - interval: 60s
+    then:
+      - lambda: |-
+          id(vl53l1x_hub).set_distance_mode(esphome::vl53l1x::DistanceMode::SHORT);
+          id(vl53l1x_hub).set_timing_budget(33000);
+          id(vl53l1x_hub).set_timeout_us(500000);
+          id(vl53l1x_hub).set_roi(4, 4);
+          id(vl53l1x_hub).set_roi_center_spad(120);
+          id(vl53l1x_hub).set_signal_threshold_mcps(0.4);
+          id(vl53l1x_hub).set_sigma_threshold_mm(15);
+          id(vl53l1x_hub).set_distance_threshold(100, 500, esphome::vl53l1x::DistanceThresholdWindow::OUTSIDE_WINDOW,
+                                                  true);
+      - vl53l1x.calibrate_offset:
+          id: vl53l1x_hub
+          target_distance_mm: 140
+      - vl53l1x.calibrate_xtalk:
+          id: vl53l1x_hub
+          target_distance_mm: !lambda "return 700;"
